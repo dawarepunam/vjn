@@ -1,0 +1,29 @@
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--color-text-light);
+  margin-bottom: 24px;
+}
+
+.crumbLink {
+  color: var(--color-primary-light);
+  transition: color var(--transition-fast);
+}
+
+.crumbLink:hover {
+  color: var(--color-accent);
+}
+
+.separator {
+  color: var(--color-border);
+  display: flex;
+  align-items: center;
+}
+
+.current {
+  color: var(--color-text-main);
+  font-weight: 600;
+}

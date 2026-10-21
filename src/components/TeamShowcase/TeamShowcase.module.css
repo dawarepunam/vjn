@@ -1,0 +1,552 @@
+/* ============================================================
+   TeamShowcase — Dark Navy Background with Gold-Border Cards
+   Matching reference image 2:
+   - Deep navy background section
+   - Gold gradient border card with dark translucent inner
+   - Circular initials avatar
+   - Direct phone and email links
+   - "View Profile →" link with click slide-over drawer
+   ============================================================ */
+
+.teamSection {
+  padding: 88px 0 96px 0;
+  background-color: #06152B;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Section Header ─────────────────────────────────────────── */
+.sectionHeader {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 52px auto;
+}
+
+.sectionPill {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #F59E0B;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+  margin: 0 0 14px 0;
+}
+
+.accent {
+  color: #F59E0B;
+}
+
+.sectionSubtitle {
+  font-size: 0.95rem;
+  color: rgba(226, 232, 240, 0.75);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Partner Cards Grid ─────────────────────────────────────── */
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .partnersGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ── Individual Partner Card (Gold Border on Dark Glass) ───── */
+.partnerCard {
+  background: rgba(10, 31, 60, 0.6);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 20px;
+  padding: 30px 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 260ms ease;
+  outline: none;
+}
+
+/* Gold glow accent in top corner */
+.partnerCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.partnerCard:hover {
+  transform: translateY(-6px);
+  border-color: #F59E0B;
+  box-shadow: 0 16px 42px rgba(245, 158, 11, 0.2);
+  background: rgba(12, 38, 72, 0.75);
+}
+
+.partnerCard:focus-visible {
+  outline: 2px solid #F59E0B;
+  outline-offset: 3px;
+}
+
+/* Top Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cardAvatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #06152B;
+  border: 2px solid #F59E0B;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.cardAvatarInitials {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.cardIdentity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cardName {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardRole {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.65);
+}
+
+/* Contact List */
+.cardContactList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 4px 0;
+}
+
+.cardContactItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(226, 232, 240, 0.85);
+  font-size: 0.86rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.cardContactItem:hover {
+  color: #F59E0B;
+}
+
+.cardContactIcon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.15);
+  color: #F59E0B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Bottom CTA */
+.cardCta {
+  margin-top: 4px;
+}
+
+.cardCtaText {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #F59E0B;
+  letter-spacing: 0.2px;
+  transition: transform 180ms ease;
+  display: inline-block;
+}
+
+.partnerCard:hover .cardCtaText {
+  transform: translateX(4px);
+}
+
+/* ── Overlay / Backdrop ─────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(4, 13, 26, 0.65);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 300ms ease, visibility 300ms ease;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.overlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ── Side Panel ─────────────────────────────────────────────── */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(540px, 94vw);
+  background-color: #FFFFFF;
+  z-index: 2100;
+  box-shadow: -14px 0 50px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(100%);
+  transition: transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.panelOpen {
+  transform: translateX(0);
+}
+
+.panelInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Hero Header of drawer */
+.panelHero {
+  background: #06152B;
+  padding: 28px 28px 30px 28px;
+  position: relative;
+  flex-shrink: 0;
+  color: #FFFFFF;
+  border-bottom: 2px solid #F59E0B;
+}
+
+.panelHeroTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.panelAvatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #0A2540;
+  border: 2px solid #F59E0B;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.panelCloseBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #FFFFFF;
+  transition: all 180ms ease;
+}
+
+.panelCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.panelHeroContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panelRoleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #F59E0B;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  width: fit-content;
+}
+
+.panelRoleDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #F59E0B;
+}
+
+.panelName {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.panelDesignation {
+  font-size: 0.88rem;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+/* Panel Body */
+.panelBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #F8FAFC;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.statItem {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #0F172A;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.statLabel {
+  font-size: 0.68rem;
+  color: #64748B;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.infoBlock {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.infoBlockHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.infoBlockIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(10, 37, 64, 0.08);
+  color: #0A2540;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoBlockTitle {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0;
+}
+
+.infoBlockSubtitle {
+  font-size: 0.7rem;
+  color: #64748B;
+  display: block;
+}
+
+.bioText {
+  font-size: 0.88rem;
+  color: #475569;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.contactRow:hover {
+  background: #FFFFFF;
+  border-color: #F59E0B;
+}
+
+.contactRowIcon {
+  font-size: 1.1rem;
+}
+
+.contactRowText {
+  display: flex;
+  flex-direction: column;
+}
+
+.contactRowLabel {
+  font-size: 0.68rem;
+  color: #64748B;
+  font-weight: 600;
+}
+
+.contactRowValue {
+  font-size: 0.88rem;
+  color: #0F172A;
+  font-weight: 700;
+}
+
+/* Panel Footer */
+.panelFooter {
+  padding: 16px 24px;
+  background: #FFFFFF;
+  border-top: 1px solid #E2E8F0;
+  display: flex;
+  gap: 12px;
+}
+
+.panelCallBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #D97706;
+  color: #FFFFFF;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.panelCallBtn:hover {
+  background: #B45309;
+}
+
+.panelEmailBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: #0F172A;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 180ms ease;
+}
+
+.panelEmailBtn:hover {
+  border-color: #0F172A;
+  background: #F8FAFC;
+}
