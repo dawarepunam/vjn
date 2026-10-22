@@ -107,14 +107,26 @@ export default function ClientsPage() {
           <div className={styles.certGrid}>
             {CERTIFICATIONS.map((cert) => (
               <div key={cert.code} className={styles.certItemCard}>
-                <div className={styles.certItemHeader}>
-                  <ShieldCheck size={24} color="var(--color-accent)" />
-                  <span className={styles.certItemCode}>{cert.code}</span>
+                <div className={styles.certItemTop}>
+                  <div className={styles.certItemIconBox}>
+                    <ShieldCheck size={24} />
+                  </div>
+                  <div className={styles.certBadgeWrap}>
+                    <span className={styles.certStatusBadge}>Verified Standard</span>
+                    <span className={styles.certItemCode}>{cert.code}</span>
+                  </div>
                 </div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-primary)', marginBottom: 8 }}>
-                  {cert.title}
-                </h3>
-                <p className={styles.certItemDesc}>{cert.description}</p>
+
+                <div className={styles.certDivider} />
+
+                <div className={styles.certBody}>
+                  <h3 className={styles.certItemTitle}>
+                    {cert.title}
+                  </h3>
+                  <p className={styles.certItemDesc}>
+                    {cert.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

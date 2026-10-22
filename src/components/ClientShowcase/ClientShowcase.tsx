@@ -44,6 +44,26 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
     setActiveClient(null);
   }, []);
 
+  // Handle anchor link / hash navigation
+  useEffect(() => {
+    const checkHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        const found = clients.find((c) => c.id === hash);
+        if (found) {
+          setActiveClient(found);
+          const el = document.getElementById(hash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      }
+    };
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+    return () => window.removeEventListener('hashchange', checkHash);
+  }, [clients]);
+
   return (
     <div>
       {/* ── Client Card Grid ─────────────────────────────────── */}
@@ -51,6 +71,7 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
         {clients.map((client, idx) => (
           <button
             key={client.id}
+            id={client.id}
             role="listitem"
             className={`${styles.clientCard} ${activeClient?.id === client.id ? styles.active : ''}`}
             onClick={() => setActiveClient(client)}
@@ -78,15 +99,19 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
                 style={{ display: client.logoUrl ? 'none' : 'flex' }}
                 title="Official logo asset pending verification"
               >
-                <span className={styles.unavailableText}>Logo Unavailable</span>
+                <span className={styles.unavailableText}>{client.logoMark || client.shortName}</span>
               </div>
             </div>
 
-            <div className={styles.cardName}>{client.shortName}</div>
-            <span className={styles.cardBadge}>{client.badge}</span>
-
-            {/* Subtle arrow hint */}
-            <ChevronRight size={14} className={styles.cardArrow} aria-hidden="true" />
+            <div className={styles.cardMetaWrap}>
+              <div className={styles.cardName}>{client.shortName}</div>
+              <div className={styles.cardBadgeRow}>
+                <span className={styles.cardBadge}>{client.badge}</span>
+                <span className={styles.cardActionHint}>
+                  View Details <ChevronRight size={13} className={styles.cardArrow} aria-hidden="true" />
+                </span>
+              </div>
+            </div>
           </button>
         ))}
       </div>

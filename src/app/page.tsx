@@ -17,6 +17,11 @@ import {
 } from 'lucide-react';
 import styles from './page.module.css';
 import CTASection from '@/components/CTASection/CTASection';
+import ClientSection from '@/components/ClientSection/ClientSection';
+import ExecutionCapabilities from '@/components/ExecutionCapabilities/ExecutionCapabilities';
+import ProcessTimeline from '@/components/ProcessTimeline/ProcessTimeline';
+import OperationalCapability from '@/components/OperationalCapability/OperationalCapability';
+import CompanyProfile from '@/components/CompanyProfile/CompanyProfile';
 import { 
   COMPANY_CONTACT, 
   SERVICES_DATA, 
@@ -84,66 +89,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 2: COMPANY INTRODUCTION */}
-      <section className={styles.sectionContainer}>
-        <div className="container">
-          <div className={styles.introGrid}>
-            <div className={styles.introContent}>
-              <span className={styles.sectionBadge}>Company Profile</span>
-              <h2 className={styles.sectionTitle}>
-                High-Caliber Engineering Backed by Modern Machinery Fleet
-              </h2>
-              <div className={styles.introHighlight}>
-                “Quality Work Is Our Backbone.” We undertake complex infrastructure works using a seamless combination of advanced machinery and skilled field manpower.
-              </div>
-              <p className={styles.introParagraph}>
-                M/s JNP Infra Eng Works specializes in HDPE and Ductile Iron (DI) pipeline works, trenching, machine jointing, 
-                hydrostatic pressure testing, and associated civil works. From utility solar plant pile drilling to massive welded reservoirs, 
-                our project-oriented approach guarantees zero-defect site handover.
-              </p>
-
-              <div className={styles.introKeyList}>
-                <div className={styles.introKeyItem}>
-                  <CheckCircle2 size={16} color="var(--color-accent)" />
-                  <span>Machine & Manual Work Capability</span>
-                </div>
-                <div className={styles.introKeyItem}>
-                  <CheckCircle2 size={16} color="var(--color-accent)" />
-                  <span>Site & Geological Adaptability</span>
-                </div>
-                <div className={styles.introKeyItem}>
-                  <CheckCircle2 size={16} color="var(--color-accent)" />
-                  <span>HDPE Pipe Jointing Expertise</span>
-                </div>
-                <div className={styles.introKeyItem}>
-                  <CheckCircle2 size={16} color="var(--color-accent)" />
-                  <span>Skilled & Safety-Certified Crew</span>
-                </div>
-              </div>
-
-              <div>
-                <Link href="/about" className={styles.serviceCardLink} style={{ fontSize: '1rem', marginTop: 8 }}>
-                  <span>Read Full Company Profile</span>
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
-
-            <div className={styles.introImageCol}>
-              <div className={styles.introImageCard}>
-                <img 
-                  src="/images/machinery-work.jpg" 
-                  alt="JNP Infra Engineering and Pipeline Works" 
-                />
-              </div>
-              <div className={styles.introFloatBadge}>
-                <div className={styles.introFloatNumber}>100%</div>
-                <div className={styles.introFloatText}>Execution with Responsibility</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* SECTION 2: COMPANY PROFILE — PREMIUM */}
+      <CompanyProfile />
 
       {/* SECTION 3: CORE SERVICES PORTFOLIO */}
       <section className={`${styles.sectionContainer} ${styles.sectionAltBg}`}>
@@ -269,162 +216,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 4: CAPABILITIES GRID */}
-      <section className={styles.sectionContainer}>
-        <div className="container">
-          <div className={styles.sectionHeaderCenter}>
-            <span className={styles.sectionBadge}>Execution Strengths</span>
-            <h2 className={styles.sectionTitle}>Built on Solid Operational Capability</h2>
-            <p className={styles.sectionDescription}>
-              Our strengths lie in our verified machinery assets, certified machine operators, and adaptive site engineering.
-            </p>
-          </div>
+      {/* SECTION 4: OPERATIONAL CAPABILITIES (PREMIUM MODERN ENGINEERING UI) */}
+      <OperationalCapability />
 
-          <div className={styles.capsGrid}>
-            {CAPABILITIES_DATA.map((cap) => (
-              <div key={cap.title} className={styles.capsCard}>
-                <div className={styles.capsIconBox}>
-                  <Wrench size={22} />
-                </div>
-                <h3 className={styles.capsTitle}>{cap.title}</h3>
-                <p className={styles.capsDesc}>{cap.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* SECTION 5: SYSTEMATIC EXECUTION APPROACH (PREMIUM HORIZONTAL PROCESS TIMELINE) */}
+      <ProcessTimeline />
 
-      {/* SECTION 5: SYSTEMATIC EXECUTION APPROACH */}
-      <section className={styles.approachSection}>
-        <div className="container">
-          <div className={styles.sectionHeaderCenter}>
-            <span className={styles.sectionBadge} style={{ color: '#FDBA74' }}>Our 5-Step Methodology</span>
-            <h2 className={styles.sectionTitle} style={{ color: '#FFFFFF' }}>
-              Plan → Execute → Test → Inspect → Complete
-            </h2>
-            <p className={styles.sectionDescription} style={{ color: '#CBD5E0' }}>
-              Every infrastructure contract at JNP Infra follows our disciplined multi-stage execution framework to ensure timely and zero-tolerance delivery.
-            </p>
-          </div>
+      {/* SECTION 6: REPRESENTATIVE WORK SHOWCASE (WITH PREMIUM BI-DIRECTIONAL SCROLL ANIMATIONS) */}
+      <ExecutionCapabilities items={WORK_SHOWCASE_ITEMS} />
 
-          <div className={styles.timelineGrid}>
-            {EXECUTION_STEPS.map((step) => (
-              <div key={step.step} className={styles.timelineCard}>
-                <div className={styles.stepNumber}>{step.step}</div>
-                <h3 className={styles.stepTitle}>{step.title}</h3>
-                <div className={styles.stepSubtitle}>{step.subtitle}</div>
-                <p className={styles.stepDesc}>{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6: REPRESENTATIVE WORK SHOWCASE */}
-      <section className={styles.sectionContainer}>
-        <div className="container">
-          <div className={styles.sectionHeaderCenter}>
-            <span className={styles.sectionBadge}>Work Showcase</span>
-            <h2 className={styles.sectionTitle}>Representative Execution Capabilities</h2>
-            <p className={styles.sectionDescription}>
-              An overview of our mechanical and civil capability across water pipeline networks, solar installations, and steel fabrications.
-            </p>
-          </div>
-
-          <div className={styles.servicesGrid}>
-            {WORK_SHOWCASE_ITEMS.slice(0, 4).map((work) => (
-              <div key={work.id} className={styles.serviceCard}>
-                <div className={styles.serviceCardImageWrapper}>
-                  <img src={work.image} alt={work.title} className={styles.serviceCardImage} />
-                  <span className={styles.serviceCardBadge}>{work.categoryLabel}</span>
-                </div>
-                <div className={styles.serviceCardBody}>
-                  <h3 className={styles.serviceCardTitle} style={{ fontSize: '1.05rem' }}>{work.title}</h3>
-                  <p className={styles.serviceCardText}>{work.description}</p>
-                  <div style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 600, marginTop: 'auto', marginBottom: 12 }}>
-                    {work.badge}
-                  </div>
-                  <Link href="/projects" className={styles.serviceCardLink}>
-                    <span>View Technical Scope</span>
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/projects" className={styles.heroPrimaryBtn}>
-              <span>Explore All Work Categories & Machinery</span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 7: CLIENTS & CERTIFICATIONS (ACCURATE TO BROCHURE) */}
-      <section className={styles.clientSection}>
-        <div className="container">
-          <div className={styles.sectionHeaderCenter}>
-            <span className={styles.sectionBadge}>Industry Collaboration</span>
-            <h2 className={styles.sectionTitle}>Leading Solar EPC & Water Infrastructure Clients</h2>
-            <p className={styles.sectionDescription}>
-              Key industry leaders and EPC contractors where our capabilities and machinery support national infrastructure goals.
-            </p>
-          </div>
-
-          <div className={styles.clientGroupGrid}>
-            {/* Solar EPC */}
-            <div className={styles.clientBlock}>
-              <div className={styles.clientBlockHeader}>
-                <Sun size={20} color="var(--color-accent)" />
-                <h3 className={styles.clientBlockTitle}>Solar EPC Clients</h3>
-              </div>
-              <div className={styles.logoPills}>
-                {solarClients.map(c => (
-                  <div key={c.name} className={styles.clientPill}>
-                    <span className={styles.clientDot} />
-                    <span>{c.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Water Infrastructure */}
-            <div className={styles.clientBlock}>
-              <div className={styles.clientBlockHeader}>
-                <Droplets size={20} color="var(--color-primary)" />
-                <h3 className={styles.clientBlockTitle}>Water Infrastructure Clients</h3>
-              </div>
-              <div className={styles.logoPills}>
-                {waterClients.map(c => (
-                  <div key={c.name} className={styles.clientPill}>
-                    <span className={styles.clientDot} />
-                    <span>{c.name}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Certifications Banner */}
-          <div style={{ marginTop: 40, padding: '24px 28px', backgroundColor: 'var(--color-bg-alt)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--color-border)', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 20 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <ShieldCheck size={32} color="var(--color-accent)" />
-              <div>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-primary)' }}>Standardized Quality & Safety Protocols</h4>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-                  Operating in full accordance with ISO 9001:2015, ISO 14001:2015, and ISO 45001:2018 management benchmarks.
-                </p>
-              </div>
-            </div>
-            <Link href="/clients" className={styles.serviceCardLink}>
-              <span>View Client Details</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* SECTION 7: CLIENTS & CERTIFICATIONS — ULTRA-PREMIUM 3-3 GRID WITH REAL LOGOS & SMOOTH MARQUEE */}
+      <ClientSection />
 
       {/* SECTION 8: CONTACT CTA */}
       <CTASection 

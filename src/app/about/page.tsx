@@ -20,6 +20,7 @@ import styles from './about.module.css';
 import Breadcrumbs from '@/components/Breadcrumbs/Breadcrumbs';
 import CTASection from '@/components/CTASection/CTASection';
 import TeamShowcase from '@/components/TeamShowcase/TeamShowcase';
+import ProcessTimeline from '@/components/ProcessTimeline/ProcessTimeline';
 import { 
   COMPANY_CONTACT, 
   EXECUTION_STEPS, 
@@ -184,7 +185,7 @@ export default function AboutPage() {
           </div>
 
           <div className={styles.capabilitiesGrid}>
-            <div className={styles.capCard}>
+            <div className={styles.capCard} data-num="01">
               <div className={styles.capIconBox}>
                 <Cog size={22} />
               </div>
@@ -195,7 +196,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className={styles.capCard}>
+            <div className={styles.capCard} data-num="02">
               <div className={styles.capIconBox}>
                 <Layers size={22} />
               </div>
@@ -206,7 +207,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className={styles.capCard}>
+            <div className={styles.capCard} data-num="03">
               <div className={styles.capIconBox}>
                 <ShieldCheck size={22} />
               </div>
@@ -217,7 +218,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className={styles.capCard}>
+            <div className={styles.capCard} data-num="04">
               <div className={styles.capIconBox}>
                 <BarChart3 size={22} />
               </div>
@@ -232,36 +233,12 @@ export default function AboutPage() {
       </section>
 
       {/* ── 5-Stage Execution Framework (Horizontal Cards Timeline) ──── */}
-      <section className={styles.methodologySection}>
-        <div className="container">
-          <div className={styles.sectionHead}>
-            <div className={styles.sectionPill}>
-              OUR PROCESS
-            </div>
-            <h2 className={styles.sectionTitle}>
-              Our 5-Stage Execution Framework
-            </h2>
-            <p className={styles.sectionDesc}>
-              Every step, driven by planning, precision, and accountability — from foundation to finish.
-            </p>
-          </div>
-
-          <div className={styles.stepsTimeline}>
-            {EXECUTION_STEPS.map((step) => (
-              <div key={step.step} className={styles.stepCardRow}>
-                <div className={styles.stepNumberBadge}>{step.step}</div>
-                <div className={styles.stepCardBody}>
-                  <div className={styles.stepCardHeader}>
-                    <h3 className={styles.stepCardTitle}>{step.title}</h3>
-                    <span className={styles.stepCardSubtitle}>{step.subtitle}</span>
-                  </div>
-                  <p className={styles.stepCardDesc}>{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── 5-Stage Execution Framework (Horizontal Process Timeline) ──── */}
+      <ProcessTimeline 
+        badgeTitle="OUR PROCESS"
+        heading="Our 5-Stage Execution Framework"
+        subheading="Every step, driven by planning, precision, and accountability — from foundation to finish."
+      />
 
       {/* ── Standards Compliance (Dark Section) ────────────────────── */}
       <section className={styles.certSection}>

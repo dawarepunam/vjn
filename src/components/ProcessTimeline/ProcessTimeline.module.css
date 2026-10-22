@@ -1,0 +1,444 @@
+/* ============================================================
+   ProcessTimeline — Premium Horizontal Process Visualization
+   Dark Navy Background (#061626 / #0F2A4A), Copper Orange Accents,
+   Continuous Connected Axis, Large Outline Icons, Bi-Directional Motion
+   No individual boxed cards, no card grid, no vertical layout on desktop.
+   ============================================================ */
+
+.timelineSection {
+  position: relative;
+  padding: 100px 0 105px 0;
+  background: radial-gradient(circle at 50% 0%, #0F2A4A 0%, #061626 100%);
+  color: #FFFFFF;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Ambient glow accents */
+.ambientGlowCenter {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(6, 22, 38, 0) 70%);
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ambientGlowOrange {
+  position: absolute;
+  bottom: 0;
+  right: 15%;
+  width: 500px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(224, 122, 43, 0.14) 0%, rgba(6, 22, 38, 0) 70%);
+  filter: blur(65px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Section Header ── */
+.sectionHeader {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 64px auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inView .sectionHeader {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #FDBA74;
+  background: rgba(224, 122, 43, 0.12);
+  border: 1px solid rgba(224, 122, 43, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.badgeSparkle {
+  color: #F59E0B;
+}
+
+.sectionTitle {
+  font-size: clamp(1.85rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.titleWord {
+  color: #FFFFFF;
+}
+
+.titleArrow {
+  color: var(--color-accent, #E07A2B);
+  margin: 0 10px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.titleWordHighlight {
+  background: linear-gradient(135deg, #FDBA74 0%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sectionDescription {
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  color: #94A3B8;
+  line-height: 1.65;
+}
+
+/* ── HORIZONTAL TIMELINE WRAPPER (NO INDIVIDUAL BOXED CARDS) ── */
+.horizontalTimelineWrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ── CONTINUOUS HORIZONTAL CONNECTING LINE ── */
+.connectingLineBackdrop {
+  position: absolute;
+  top: 106px; /* Exactly aligned with center of icon orbs */
+  left: 4%;
+  right: 4%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  z-index: 1;
+}
+
+.activeProgressLine {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #F97316 0%, #EA580C 70%, #F59E0B 100%);
+  box-shadow: 0 0 14px rgba(234, 88, 12, 0.6);
+  transition: width 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── STAGES TRACK (DESKTOP: SINGLE HORIZONTAL AXIS) ── */
+.stagesTrack {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 2;
+  gap: 20px;
+}
+
+/* Individual Stage Node (Transparent, Unboxed, Seamless) */
+.stageNode {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Bi-directional appearance on scroll */
+.inView .stageNode {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.outOfView .stageNode {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Top Step Number */
+.stepNumberRow {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 22px;
+  transition: transform 300ms ease;
+}
+
+.stepNumberText {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #64748B;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  transition: color 300ms ease, text-shadow 300ms ease;
+}
+
+.stepPhaseTag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #475569;
+  text-transform: uppercase;
+}
+
+.nodeActive .stepNumberText {
+  color: #FDBA74;
+}
+
+.nodeCurrent .stepNumberText {
+  color: #FFFFFF;
+  text-shadow: 0 0 15px rgba(234, 88, 12, 0.7);
+}
+
+/* ── ICON ORB ON HORIZONTAL AXIS ── */
+.iconOrbWrapper {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.iconOrbRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #0B192C;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 255, 255, 0.03);
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 2;
+}
+
+.iconOrbCore {
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 350ms ease;
+}
+
+.stageIcon {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active Node State */
+.nodeActive .iconOrbRing {
+  border-color: rgba(234, 88, 12, 0.6);
+  background: #0F2644;
+}
+
+.nodeActive .iconOrbCore {
+  color: #FDBA74;
+}
+
+/* Current Stage Glow Pulse */
+.nodeCurrent .iconOrbRing {
+  border-color: #F97316;
+  background: linear-gradient(135deg, #163E66 0%, #0A2540 100%);
+  box-shadow: 0 0 24px rgba(234, 88, 12, 0.55), inset 0 0 10px rgba(234, 88, 12, 0.3);
+}
+
+.nodeCurrent .iconOrbCore {
+  color: #FFFFFF;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(234, 88, 12, 0.5);
+  animation: pulseOrb 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseOrb {
+  0% { transform: scale(0.95); opacity: 0.9; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+/* ── STAGE CONTENT (TITLE, SUBTITLE, DESCRIPTION) ── */
+.stageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 6px;
+}
+
+.stageTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #E2E8F0;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+  line-height: 1.25;
+  transition: color 250ms ease;
+}
+
+.nodeActive .stageTitle {
+  color: #FFFFFF;
+}
+
+.stageSubtitle {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #CBD5E1;
+  margin-bottom: 12px;
+  line-height: 1.35;
+  min-height: 2.7em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 250ms ease;
+}
+
+.nodeActive .stageSubtitle {
+  color: #FDBA74;
+}
+
+.stageDescription {
+  font-size: 0.85rem;
+  color: #94A3B8;
+  line-height: 1.6;
+  max-width: 230px;
+  transition: color 250ms ease;
+}
+
+.nodeActive .stageDescription {
+  color: #CBD5E1;
+}
+
+/* Complete Step Special Refined Accent */
+.nodeFinal.nodeActive .iconOrbRing {
+  border-color: #10B981;
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.45);
+}
+
+.nodeFinal.nodeActive .iconOrbCore {
+  color: #10B981;
+}
+
+.nodeFinal.nodeActive .stageTitle {
+  color: #6EE7B7;
+}
+
+/* ── PREMIUM HOVER INTERACTIONS ── */
+.stageNode:hover .iconOrbRing {
+  transform: scale(1.1);
+  border-color: #EA580C;
+  box-shadow: 0 0 28px rgba(224, 122, 43, 0.65), 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.stageNode:hover .stageIcon {
+  transform: scale(1.08);
+}
+
+.stageNode:hover .iconOrbCore {
+  color: #FFFFFF;
+}
+
+.stageNode:hover .stepNumberText {
+  color: #FDBA74;
+  transform: scale(1.08);
+}
+
+.stageNode:hover .stageTitle {
+  color: #FDBA74;
+}
+
+.stageNode:hover .stageDescription {
+  color: #FFFFFF;
+}
+
+/* Mobile Scroll Prompt */
+.mobileScrollPrompt {
+  display: none;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #94A3B8;
+  margin-top: 24px;
+}
+
+/* ── RESPONSIVE DESIGN (TABLET & MOBILE) ── */
+@media (max-width: 1024px) {
+  .stagesTrack {
+    gap: 12px;
+  }
+  .stageDescription {
+    font-size: 0.8rem;
+    max-width: 190px;
+  }
+  .stageTitle {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 820px) {
+  /* Mobile: Preserve Horizontal Process Concept via Compact Horizontally Scrollable Timeline */
+  .horizontalTimelineWrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(224, 122, 43, 0.4) transparent;
+  }
+
+  .connectingLineBackdrop {
+    width: 900px;
+    left: 45px;
+  }
+
+  .stagesTrack {
+    width: 950px;
+    padding: 0 20px;
+  }
+
+  .mobileScrollPrompt {
+    display: block;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .sectionHeader,
+  .stageNode,
+  .activeProgressLine,
+  .pulseRing {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

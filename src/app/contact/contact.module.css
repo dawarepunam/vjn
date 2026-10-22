@@ -46,129 +46,387 @@
   gap: 32px;
 }
 
-.infoCard {
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  box-shadow: var(--shadow-sm);
-}
-
-.infoTitle {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--color-primary);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-border-subtle);
-}
-
-.addressRow {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
+/* Office Card (Registered Office) */
+.officeCard {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 30px 28px;
+  box-shadow: 0 4px 18px -2px rgba(10, 37, 64, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 280ms ease,
+              border-color 280ms ease;
   margin-bottom: 24px;
 }
 
-.addressIcon {
-  color: var(--color-accent);
+.officeCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F7931E, #EA580C);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.officeCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(247, 147, 30, 0.45);
+  box-shadow: 0 16px 36px -6px rgba(10, 37, 64, 0.1), 0 4px 14px rgba(247, 147, 30, 0.08);
+}
+
+.officeCard:hover::before {
+  opacity: 1;
+}
+
+.cardHeaderTop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.officeIconBox {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(247, 147, 30, 0.12);
+  color: #EA580C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  margin-top: 3px;
+  border: 1px solid rgba(247, 147, 30, 0.25);
+  transition: all 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.officeCard:hover .officeIconBox {
+  background: linear-gradient(135deg, #F7931E 0%, #EA580C 100%);
+  color: #FFFFFF;
+  transform: scale(1.08) rotate(-4deg);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.35);
+  border-color: transparent;
+}
+
+.cardBadgePill {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #EA580C;
+  background: rgba(247, 147, 30, 0.1);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  margin-bottom: 4px;
+}
+
+.officeTitle {
+  font-size: 1.35rem;
+  font-weight: 850;
+  color: #0A2540;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.officeDivider {
+  width: 100%;
+  height: 1px;
+  background: #EDF2F7;
+  margin: 18px 0;
 }
 
 .addressText {
-  font-size: 0.95rem;
-  color: var(--color-text-main);
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.65;
+}
+
+.companyNameHighlight {
+  font-size: 1.05rem;
+  color: #0A2540;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.companyAddressDesc {
+  margin: 0 0 14px 0;
+  color: #64748B;
+  font-size: 0.92rem;
   line-height: 1.6;
 }
 
 .mapBtn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--color-accent);
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-top: 6px;
+  gap: 8px;
+  color: #EA580C;
+  background: rgba(247, 147, 30, 0.08);
+  border: 1px solid rgba(247, 147, 30, 0.25);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  text-decoration: none;
+  transition: all 220ms ease;
 }
 
 .mapBtn:hover {
-  text-decoration: underline;
+  background: linear-gradient(135deg, #F7931E, #EA580C);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
 }
 
-/* Owners cards */
+/* Owners Section & Cards */
+.ownersSection {
+  margin-bottom: 24px;
+}
+
+.ownersSectionHeader {
+  margin-bottom: 14px;
+}
+
+.ownersHeading {
+  font-size: 1.3rem;
+  font-weight: 850;
+  color: #0A2540;
+  margin: 4px 0 0 0;
+  letter-spacing: -0.3px;
+}
+
+.ownersList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .ownerCard {
-  background-color: var(--color-bg-alt);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius-sm);
-  padding: 18px 20px;
-  margin-bottom: 16px;
+  background: #FFFFFF;
+  border: 1.5px solid #EDF2F7;
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 14px -2px rgba(10, 37, 64, 0.04);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 280ms ease,
+              border-color 280ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accent left strip */
+.ownerCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3.5px;
+  background: linear-gradient(180deg, #F7931E, #EA580C);
+  opacity: 0.85;
+  transition: width 240ms ease;
+}
+
+.ownerCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(247, 147, 30, 0.4);
+  box-shadow: 0 16px 32px -8px rgba(10, 37, 64, 0.12), 0 4px 14px rgba(247, 147, 30, 0.08);
+}
+
+.ownerCard:hover::before {
+  width: 5px;
+}
+
+.ownerTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ownerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0A2540 0%, #0F3A66 100%);
+  color: #F7931E;
+  font-size: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(247, 147, 30, 0.3);
+  box-shadow: 0 4px 12px rgba(10, 37, 64, 0.15);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ownerCard:hover .ownerAvatar {
+  transform: scale(1.08);
+  border-color: #F7931E;
+}
+
+.ownerMeta {
+  flex: 1;
 }
 
 .ownerName {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-size: 1.12rem;
+  font-weight: 850;
+  color: #0A2540;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
 }
 
 .ownerRole {
-  font-size: 0.8rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  margin-bottom: 10px;
+  font-size: 0.78rem;
+  color: #EA580C;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: 2px;
+}
+
+.ownerDivider {
+  width: 100%;
+  height: 1px;
+  background: #F1F5F9;
+  margin: 16px 0 14px 0;
 }
 
 .contactList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .contactLink {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  transition: color var(--transition-fast);
+  font-size: 0.88rem;
+  color: #475569;
+  text-decoration: none;
+  transition: all 200ms ease;
+}
+
+.contactIconWrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #EA580C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 200ms ease;
 }
 
 .contactLink:hover {
-  color: var(--color-accent);
+  color: #EA580C;
 }
 
-/* Form Column */
+.contactLink:hover .contactIconWrap {
+  background: linear-gradient(135deg, #F7931E, #EA580C);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: scale(1.1);
+}
+
+.contactText {
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+/* Mobilization Bottom Card */
+.mobilizationCard {
+  background: linear-gradient(145deg, #0C2340 0%, #07192E 100%);
+  color: #FFFFFF;
+  padding: 24px 26px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid rgba(12, 35, 64, 0.15);
+  box-shadow: 0 10px 28px -6px rgba(11, 34, 64, 0.28);
+  transition: transform 280ms ease, box-shadow 280ms ease;
+}
+
+.mobilizationCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -6px rgba(11, 34, 64, 0.4);
+}
+
+.mobilizationIconWrap {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(247, 147, 30, 0.15);
+  color: #F7931E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(247, 147, 30, 0.25);
+}
+
+.mobilizationTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0;
+  color: #FFFFFF;
+  letter-spacing: -0.2px;
+}
+
+.mobilizationDesc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin-top: 4px;
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+/* Form Column - Ultra Premium Styling */
 .formCol {
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  box-shadow: var(--shadow-md);
+  background: radial-gradient(circle at 10% 10%, #0F2644 0%, #061626 100%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4), 0 0 25px rgba(224, 122, 43, 0.12);
+  color: #FFFFFF;
 }
 
 .formTitle {
-  font-size: 1.5rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  color: var(--color-primary);
+  color: #FFFFFF;
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
 .formSubtitle {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  color: #94A3B8;
   margin-bottom: 28px;
+  line-height: 1.6;
 }
 
 .enquiryForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .formRow {
@@ -184,31 +442,46 @@
 }
 
 .formLabel {
-  font-size: 0.875rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: var(--color-primary);
+  color: #CBD5E1;
+  letter-spacing: 0.2px;
 }
 
 .formInput, .formSelect, .formTextarea {
   padding: 12px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  font-size: 0.9375rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  font-size: 0.9rem;
   font-family: inherit;
-  color: var(--color-text-main);
-  background-color: #FFFFFF;
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.06);
   transition: all var(--transition-fast);
+}
+
+.formInput::placeholder, .formTextarea::placeholder {
+  color: #64748B;
 }
 
 .formInput:focus, .formSelect:focus, .formTextarea:focus {
   border-color: var(--color-accent);
+  background-color: rgba(255, 255, 255, 0.1);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(224, 122, 43, 0.15);
+  box-shadow: 0 0 0 3px rgba(224, 122, 43, 0.25);
+}
+
+.formSelect {
+  cursor: pointer;
+}
+
+.formSelect option {
+  background-color: #061626;
+  color: #FFFFFF;
 }
 
 .formTextarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 110px;
 }
 
 .submitBtn {
@@ -216,19 +489,21 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #C2410C 100%);
   color: #FFFFFF;
   font-weight: 700;
   font-size: 1rem;
   padding: 14px 28px;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px rgba(224, 122, 43, 0.35);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(224, 122, 43, 0.4);
   transition: all var(--transition-fast);
 }
 
-.submitBtn:hover {
+.submitBtn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(224, 122, 43, 0.5);
+  box-shadow: 0 6px 22px rgba(224, 122, 43, 0.55);
 }
 
 .alertBox {
@@ -251,4 +526,66 @@
   background-color: #FEF2F2;
   color: #991B1B;
   border: 1px solid #FECACA;
+}
+
+/* ── Mobile Responsive Rules ──────────────────────────────── */
+@media (max-width: 768px) {
+  .contactLayout {
+    padding: 40px 0 64px 0;
+    gap: 36px;
+  }
+  .formCol {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+  .formTitle {
+    font-size: 1.55rem;
+  }
+  .officeCard {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .ownerCard {
+    padding: 18px 18px;
+    border-radius: 16px;
+  }
+  .mobilizationCard {
+    padding: 20px 18px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactLayout {
+    padding: 32px 0 48px 0;
+    gap: 28px;
+  }
+  .formCol {
+    padding: 24px 16px;
+  }
+  .formTitle {
+    font-size: 1.4rem;
+  }
+  .submitBtn {
+    width: 100%;
+  }
+  .cardHeaderTop {
+    gap: 12px;
+  }
+  .officeIconBox {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .officeTitle {
+    font-size: 1.2rem;
+  }
+  .ownerAvatar {
+    width: 42px;
+    height: 42px;
+    font-size: 0.9rem;
+  }
+  .ownerName {
+    font-size: 1.02rem;
+  }
 }

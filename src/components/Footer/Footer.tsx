@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MapPin, ChevronRight, ShieldCheck } from 'lucide-react';
 import styles from './Footer.module.css';
 import { COMPANY_CONTACT } from '@/data/companyData';
@@ -10,10 +11,15 @@ export default function Footer() {
         <div className={styles.footerGrid}>
           {/* Company Branding Column */}
           <div className={styles.brandCol}>
-            <div className={styles.footerLogo}>
-              <div className={styles.logoIcon}>JNP</div>
-              <span className={styles.footerBrandName}>JNP INFRA ENG WORKS</span>
-            </div>
+            <Link href="/" className={styles.footerLogoLink}>
+              <Image 
+                src="/images/logo-light.png" 
+                alt="M/s JNP Infra Eng Works" 
+                width={260} 
+                height={65} 
+                className={styles.footerLogoImg}
+              />
+            </Link>
             <p className={styles.tagline}>{COMPANY_CONTACT.tagline}</p>
             <p className={styles.brandDesc}>
               A specialized infrastructure execution company delivering high-standard HDPE & DI pipelines, 

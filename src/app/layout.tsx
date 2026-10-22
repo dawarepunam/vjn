@@ -3,6 +3,8 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import EnquiryModal from '@/components/EnquiryModal/EnquiryModal';
+import QuoteSliderModal from '@/components/QuoteSliderModal/QuoteSliderModal';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -47,6 +49,8 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <EnquiryModal />
+        <QuoteSliderModal />
       </body>
     </html>
   );

@@ -1,0 +1,343 @@
+/* ============================================================
+   ExecutionCapabilities — Bi-Directional Outside Scroll Animation
+   Equal Height 4-Card Responsive Grid, Fixed Image Aspect Ratios,
+   Two-Line Title Clamp, Three-Line Description Clamp & Hover Effects
+   ============================================================ */
+
+.executionSection {
+  position: relative;
+  padding: 92px 0 96px 0;
+  background-color: var(--color-bg-main, #FAFBFC);
+  overflow: hidden;
+}
+
+/* ── Heading Animation (Fades in with upward subtle drift) ── */
+.sectionHeader {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 52px auto;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.inView .sectionHeader {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badgeWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--color-accent, #E07A2B);
+  background: rgba(224, 122, 43, 0.1);
+  border: 1px solid rgba(224, 122, 43, 0.25);
+}
+
+.badgeIcon {
+  color: var(--color-accent, #E07A2B);
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 3.8vw, 2.6rem);
+  font-weight: 800;
+  color: var(--color-primary, #0A2540);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.titleHighlight {
+  background: linear-gradient(135deg, #0A2540 0%, #163E66 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sectionDescription {
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  color: var(--color-text-muted, #4A5568);
+  line-height: 1.65;
+}
+
+/* ── Equal Height 4-Card Grid ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1040px) {
+  .cardsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+/* ── Capability Card Base ── */
+.capabilityCard {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border, #E2E8F0);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(10, 37, 64, 0.05), 0 2px 4px -1px rgba(10, 37, 64, 0.03);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 750ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 300ms ease,
+              border-color 300ms ease;
+}
+
+/* ── ENTRANCE FROM OUTSIDE ANIMATIONS (SCROLLING DOWN) ── */
+/* Card 0: Enter from Left outside */
+.enterFromLeft {
+  transform: translateX(-70px) scale(0.96);
+}
+
+/* Card 1 & 2: Enter from subtle top / inward */
+.enterFromTopLeft {
+  transform: translateY(50px) translateX(-25px) scale(0.96);
+}
+
+.enterFromTopRight {
+  transform: translateY(50px) translateX(25px) scale(0.96);
+}
+
+/* Card 3: Enter from Right outside */
+.enterFromRight {
+  transform: translateX(70px) scale(0.96);
+}
+
+/* WHEN IN VIEW: Cards move smoothly to (0,0) with opacity 1 */
+.inView .capabilityCard {
+  opacity: 1;
+  transform: translateX(0) translateY(0) scale(1);
+}
+
+/* ── REVERSE ANIMATION (WHEN SCROLLING BACK UP / EXITING) ── */
+.exitUp .enterFromLeft {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.96);
+}
+
+.exitUp .enterFromRight {
+  opacity: 0;
+  transform: translateX(60px) scale(0.96);
+}
+
+.exitUp .enterFromTopLeft,
+.exitUp .enterFromTopRight {
+  opacity: 0;
+  transform: translateY(-50px) scale(0.96);
+}
+
+.exitDown .capabilityCard {
+  opacity: 0;
+  transform: translateY(60px) scale(0.96);
+}
+
+/* ── CARD HOVER EFFECTS (Upward lift + subtle orange border & glow) ── */
+.capabilityCard:hover {
+  transform: translateY(-6px) scale(1.01) !important;
+  border-color: var(--color-accent, #E07A2B);
+  box-shadow: 0 20px 25px -5px rgba(10, 37, 64, 0.1), 0 10px 10px -5px rgba(224, 122, 43, 0.12);
+}
+
+/* ── Image Frame with Fixed Aspect Ratio (16:10) ── */
+.imageFrame {
+  width: 100%;
+  height: 195px;
+  position: relative;
+  overflow: hidden;
+  background-color: #0A2540;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capabilityCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.categoryBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(10, 37, 64, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2;
+}
+
+/* Subtle corner glow on image */
+.imageGlowOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(10, 37, 64, 0.35) 100%);
+  pointer-events: none;
+}
+
+/* ── Card Body with Strict Two-Line Title & Three-Line Clamp ── */
+.cardBody {
+  padding: 22px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Exactly 2 lines height allocated for all cards */
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary, #0A2540);
+  line-height: 1.35;
+  margin-bottom: 10px;
+  min-height: 2.7em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 250ms ease;
+}
+
+.capabilityCard:hover .cardTitle {
+  color: var(--color-accent, #E07A2B);
+}
+
+/* Exactly 3 lines clamped description */
+.cardDescription {
+  font-size: 0.86rem;
+  color: var(--color-text-muted, #4A5568);
+  line-height: 1.55;
+  margin-bottom: 18px;
+  min-height: 4em;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Pinned Footer ── */
+.cardFooter {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border-subtle, #EDF2F7);
+}
+
+.verifiedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-accent, #E07A2B);
+  letter-spacing: 0.2px;
+}
+
+.shieldIcon {
+  flex-shrink: 0;
+}
+
+.ctaLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-primary, #0A2540);
+  text-decoration: none;
+  transition: all 250ms ease;
+}
+
+.ctaArrow {
+  transition: transform 250ms ease;
+  color: var(--color-accent, #E07A2B);
+}
+
+.capabilityCard:hover .ctaLink {
+  color: var(--color-accent, #E07A2B);
+}
+
+.capabilityCard:hover .ctaArrow {
+  transform: translateX(5px);
+}
+
+/* ── Bottom Section Button ── */
+.bottomCtaRow {
+  margin-top: 44px;
+  display: flex;
+  justify-content: center;
+}
+
+.exploreAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-primary, #0A2540);
+  color: #FFFFFF;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(10, 37, 64, 0.2);
+  transition: all 250ms ease;
+}
+
+.exploreAllBtn:hover {
+  background: var(--color-accent, #E07A2B);
+  box-shadow: 0 6px 20px rgba(224, 122, 43, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ── Reduced Motion Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .sectionHeader,
+  .capabilityCard {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

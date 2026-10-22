@@ -31,6 +31,24 @@
   gap: 16px;
 }
 
+.footerLogoLink {
+  display: inline-block;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.footerLogoLink:hover {
+  opacity: 0.92;
+}
+
+.footerLogoImg {
+  height: 52px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  display: block;
+}
+
 .footerLogo {
   display: flex;
   align-items: center;

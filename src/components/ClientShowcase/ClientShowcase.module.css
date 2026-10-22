@@ -14,22 +14,22 @@
 
 @media (min-width: 640px) {
   .clientGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
 @media (min-width: 900px) {
   .clientGrid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 }
 
 @media (min-width: 1200px) {
   .clientGrid {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
   }
 }
 
@@ -42,18 +42,18 @@
 }
 
 .clientCard {
-  background-color: #FFFFFF;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 16px;
-  padding: 18px 16px;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(10, 37, 64, 0.05);
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 24px 20px 20px;
+  text-align: left;
+  box-shadow: 0 4px 18px -2px rgba(10, 37, 64, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 112px;
-  height: 112px;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 180px;
+  height: auto;
   cursor: pointer;
   transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -62,96 +62,163 @@
   outline: none;
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Subtle accent line on top */
+.clientCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #F7931E, #EA580C);
+  opacity: 0;
+  transition: opacity 280ms ease;
 }
 
 .clientCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 28px -6px rgba(14, 165, 233, 0.12), 0 8px 12px -4px rgba(10, 37, 64, 0.06);
-  border-color: rgba(14, 165, 233, 0.45);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px -6px rgba(10, 37, 64, 0.12), 0 6px 16px -2px rgba(247, 147, 30, 0.1);
+  border-color: rgba(247, 147, 30, 0.45);
+}
+
+.clientCard:hover::before {
+  opacity: 1;
 }
 
 .clientCard:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #F7931E;
   outline-offset: 3px;
 }
 
 .clientCard.active {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-primary), 0 10px 20px -4px rgba(10, 37, 64, 0.12);
-  transform: translateY(-4px);
+  border-color: #0A2540;
+  box-shadow: 0 0 0 2px #0A2540, 0 16px 32px -4px rgba(10, 37, 64, 0.16);
+  transform: translateY(-6px);
 }
 
 /* Logo area within card */
 .cardLogoWrap {
   width: 100%;
-  height: 100%;
-  max-height: 56px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  background: #F8FAFC;
+  border-radius: 12px;
+  border: 1px solid #EDF2F7;
+  padding: 8px 14px;
   box-sizing: border-box;
+  margin-bottom: 16px;
+  transition: background 280ms ease, border-color 280ms ease;
+}
+
+.clientCard:hover .cardLogoWrap {
+  background: #FFFFFF;
+  border-color: #CBD5E1;
 }
 
 .cardLogoImg {
   max-width: 100%;
-  max-height: 54px;
+  max-height: 48px;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
-  transition: transform 300ms ease;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .clientCard:hover .cardLogoImg {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
-/* Neutral fallback for unverified / unavailable logos */
+/* Fallback lettermark for unavailable logos */
 .cardLogoUnavailable {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-sm);
-  background-color: #F8FAFC;
-  border: 1px dashed #CBD5E1;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(10, 37, 64, 0.05) 0%, rgba(247, 147, 30, 0.08) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 6px;
+  padding: 4px 8px;
   box-sizing: border-box;
 }
 
 .unavailableText {
-  font-size: 0.68rem;
-  font-weight: 600;
-  color: #64748B;
+  font-size: 0.88rem;
+  font-weight: 850;
+  color: #0A2540;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.8px;
   text-align: center;
-  line-height: 1.1;
+}
+
+.cardMetaWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
 }
 
 .cardName {
-  display: none;
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0A2540;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  transition: color 240ms ease;
+}
+
+.clientCard:hover .cardName {
+  color: #EA580C;
+}
+
+.cardBadgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .cardBadge {
-  display: none;
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  background: #F1F5F9;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+.cardActionHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #EA580C;
+  opacity: 0.85;
+  transition: opacity 200ms ease, transform 200ms ease;
 }
 
 .cardArrow {
-  position: absolute;
-  bottom: 8px;
-  right: 10px;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 200ms ease, transform 200ms ease;
-  color: var(--color-accent);
+  transition: transform 200ms ease;
+}
+
+.clientCard:hover .cardActionHint {
+  opacity: 1;
 }
 
 .clientCard:hover .cardArrow {
-  opacity: 1;
-  transform: translateX(0);
+  transform: translateX(3px);
 }
 
 /* ── Overlay / Backdrop ─────────────────────────────────────── */

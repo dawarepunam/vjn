@@ -53,10 +53,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     <>
       {/* Detail Hero */}
       <section className={styles.detailHero}>
-        <div 
-          className={styles.heroBackdrop}
-          style={{ backgroundImage: `url(${service.heroImage})` }} 
-        />
+        <div className={styles.heroBackdrop} />
         <div className={`container ${styles.heroInner}`}>
           <Breadcrumbs 
             items={[
@@ -76,14 +73,22 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className={styles.contentCol}>
             {/* Overview */}
             <div className={styles.sectionBlock}>
-              <h2 className={styles.blockTitle}>Executive Overview & Execution Scope</h2>
-              <p className={styles.overviewText}>{service.longDesc}</p>
+              <div className={styles.blockHeaderWrap}>
+                <span className={styles.blockPill}>Executive Brief</span>
+                <h2 className={styles.blockTitle}>Executive Overview &amp; Execution Scope</h2>
+              </div>
               
-              <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div className={styles.overviewLeadBox}>
+                <p className={styles.overviewLeadText}>{service.longDesc}</p>
+              </div>
+              
+              <div className={styles.featuresCardGrid}>
                 {service.features.map((feature) => (
-                  <div key={feature} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: '0.95rem', color: 'var(--color-primary)' }}>
-                    <CheckCircle2 size={18} color="var(--color-accent)" style={{ flexShrink: 0, marginTop: 2 }} />
-                    <span style={{ fontWeight: 500 }}>{feature}</span>
+                  <div key={feature} className={styles.featureItemCard}>
+                    <div className={styles.featureIconWrap}>
+                      <CheckCircle2 size={18} />
+                    </div>
+                    <span className={styles.featureItemText}>{feature}</span>
                   </div>
                 ))}
               </div>
@@ -91,19 +96,39 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             {/* Technical Sub-Capabilities Detailed Breakdown */}
             <div className={styles.sectionBlock}>
-              <h2 className={styles.blockTitle}>Technical Work Categories & Methods</h2>
+              <div className={styles.blockHeaderWrap}>
+                <span className={styles.blockPill}>Execution Methods</span>
+                <h2 className={styles.blockTitle}>Technical Work Categories &amp; Methods</h2>
+                <p className={styles.blockSubtitle}>
+                  Specialized techniques, certified machinery, and standardized execution protocols applied by JNP Infra across this domain.
+                </p>
+              </div>
+
               <div className={styles.subCapsList}>
-                {service.subCapabilities.map((subCap) => (
+                {service.subCapabilities.map((subCap, idx) => (
                   <div key={subCap.title} className={styles.subCapCard}>
-                    <h3 className={styles.subCapTitle}>{subCap.title}</h3>
+                    <div className={styles.subCapHeader}>
+                      <div className={styles.subCapNumber}>
+                        0{idx + 1}
+                      </div>
+                      <div className={styles.subCapTitleWrap}>
+                        <h3 className={styles.subCapTitle}>{subCap.title}</h3>
+                        <span className={styles.subCapCategoryTag}>Standard Protocol</span>
+                      </div>
+                    </div>
+
                     <p className={styles.subCapText}>{subCap.description}</p>
+
                     {subCap.specifications && (
-                      <div className={styles.specList}>
-                        {subCap.specifications.map((spec) => (
-                          <span key={spec} className={styles.specBadge}>
-                            ✓ {spec}
-                          </span>
-                        ))}
+                      <div className={styles.specSection}>
+                        <div className={styles.specList}>
+                          {subCap.specifications.map((spec) => (
+                            <span key={spec} className={styles.specBadge}>
+                              <span className={styles.specCheck}>✓</span>
+                              <span>{spec}</span>
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -113,26 +138,21 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             {/* Brochure Highlight Badges */}
             <div className={styles.sectionBlock}>
-              <h2 className={styles.blockTitle}>Brochure-Verified Highlights</h2>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 12 }}>
+              <div className={styles.blockHeaderWrap}>
+                <span className={styles.blockPill}>Compliance &amp; Capabilities</span>
+                <h2 className={styles.blockTitle}>Brochure-Verified Highlights</h2>
+                <p className={styles.blockSubtitle}>
+                  Certified capabilities, specialized tooling, and equipment capabilities directly reflected in JNP Infra engineering documentation.
+                </p>
+              </div>
+
+              <div className={styles.brochureGrid}>
                 {service.brochureHighlights.map((hl) => (
-                  <div 
-                    key={hl} 
-                    style={{ 
-                      padding: '8px 16px', 
-                      backgroundColor: 'var(--color-bg-alt)', 
-                      borderRadius: 'var(--radius-sm)', 
-                      border: '1px solid var(--color-border)', 
-                      fontSize: '0.9rem', 
-                      fontWeight: 600, 
-                      color: 'var(--color-primary)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 8
-                    }}
-                  >
-                    <Wrench size={14} color="var(--color-accent)" />
-                    <span>{hl}</span>
+                  <div key={hl} className={styles.brochureHighlightCard}>
+                    <div className={styles.brochureIconWrap}>
+                      <Wrench size={16} />
+                    </div>
+                    <span className={styles.brochureText}>{hl}</span>
                   </div>
                 ))}
               </div>

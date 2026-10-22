@@ -1,0 +1,440 @@
+/* ============================================================
+   QuoteSliderModal — Premium Project Quotes Slider
+   Alternating Layout: Slide 1 (Image Left/Quote Right), Slide 2 (Quote Left/Image Right)
+   Smooth 2.8s transitions, pause-on-hover, dark navy & copper theme
+   ============================================================ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: rgba(3, 11, 20, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: overlayFadeIn 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  overflow-y: auto;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalBox {
+  position: relative;
+  width: 100%;
+  max-width: 1060px;
+  background: radial-gradient(circle at 10% 10%, #0D2B4D 0%, #061626 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.85), 0 0 35px rgba(224, 122, 43, 0.2);
+  overflow: hidden;
+  animation: modalScaleIn 340ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  margin: auto;
+  color: #FFFFFF;
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Close button */
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+/* Header strip */
+.modalHeaderStrip {
+  padding: 18px 28px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.headerLeftBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FDBA74;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.sparkleIcon {
+  color: #F59E0B;
+}
+
+.sliderCounter {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 12px;
+  border-radius: 9999px;
+  margin-right: 40px;
+}
+
+.sliderCounter span {
+  color: #FDBA74;
+}
+
+/* Slider Stage */
+.sliderStage {
+  position: relative;
+  min-height: 440px;
+}
+
+/* Slide Card Animation with Smooth Horizontal Side Entrance */
+.slideCard {
+  display: grid;
+  grid-template-columns: 1fr;
+  animation: slideInFromSide 450ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes slideInFromSide {
+  0% {
+    opacity: 0;
+    transform: translateX(45px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@media (min-width: 860px) {
+  /* Layout 1: Image Left, Quote Right */
+  .layoutImageLeft {
+    grid-template-columns: 1fr 1.2fr;
+  }
+  .layoutImageLeft .slideImageSide {
+    order: 1;
+  }
+  .layoutImageLeft .slideQuoteSide {
+    order: 2;
+  }
+
+  /* Layout 2: Quote Left, Image Right */
+  .layoutImageRight {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .layoutImageRight .slideQuoteSide {
+    order: 1;
+  }
+  .layoutImageRight .slideImageSide {
+    order: 2;
+  }
+}
+
+/* Image Side */
+.slideImageSide {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  background: #061626;
+}
+
+@media (min-width: 860px) {
+  .slideImageSide {
+    min-height: 440px;
+  }
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 3s ease-out;
+}
+
+.slideCard:hover .projectImage {
+  transform: scale(1.04);
+}
+
+.imageOverlayTag {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(6, 22, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+/* Quote Side */
+.slideQuoteSide {
+  padding: 32px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(10, 37, 64, 0.45);
+}
+
+.categoryBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(224, 122, 43, 0.15);
+  border: 1px solid rgba(224, 122, 43, 0.35);
+  color: #FB923C;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.projectTitle {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+
+/* Quote Price Card */
+.quotePriceCard {
+  background: linear-gradient(135deg, rgba(224, 122, 43, 0.16) 0%, rgba(224, 122, 43, 0.05) 100%);
+  border: 1px solid rgba(224, 122, 43, 0.4);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.quotePriceTitle {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #CBD5E1;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.quotePriceAmount {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FDBA74;
+  line-height: 1.2;
+}
+
+.quoteDisclaimer {
+  display: block;
+  font-size: 0.7rem;
+  color: #94A3B8;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.scopeSummary {
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+
+.highlightsList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: #E2E8F0;
+}
+
+.checkIcon {
+  color: #10B981;
+  flex-shrink: 0;
+}
+
+/* Action Buttons */
+.quoteActionRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.requestQuoteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--color-accent) 0%, #C2410C 100%);
+  color: #FFFFFF;
+  padding: 11px 22px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 4px 16px rgba(224, 122, 43, 0.4);
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.requestQuoteBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(224, 122, 43, 0.55);
+  color: #FFFFFF;
+}
+
+.callDirectorBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+  padding: 11px 18px;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.86rem;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.callDirectorBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Controls Strip at bottom */
+.modalControlsStrip {
+  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.navigationArrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navArrowBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.navArrowBtn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.dotsTrack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dotItem {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dotActive {
+  width: 28px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(224, 122, 43, 0.6);
+}
+
+.autoPlayIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  color: #94A3B8;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 640px) {
+  .modalHeaderStrip {
+    padding: 14px 18px;
+  }
+  .headerLeftBadge {
+    font-size: 0.72rem;
+  }
+  .sliderCounter {
+    margin-right: 32px;
+  }
+  .slideQuoteSide {
+    padding: 24px 20px;
+  }
+  .quotePriceAmount {
+    font-size: 1.35rem;
+  }
+  .modalControlsStrip {
+    padding: 12px 18px;
+    flex-wrap: wrap;
+  }
+}

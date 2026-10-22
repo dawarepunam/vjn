@@ -1,19 +1,14 @@
 .detailHero {
   position: relative;
-  background-color: var(--color-primary-dark);
+  background: radial-gradient(circle at 20% 30%, #0F2D54 0%, #0A213D 60%, #06152B 100%);
   color: #FFFFFF;
-  padding: 64px 0 80px 0;
+  padding: 68px 0 80px 0;
   overflow: hidden;
-  border-bottom: 3px solid var(--color-accent);
+  border-bottom: 3px solid #F7931E;
 }
 
 .heroBackdrop {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.22;
-  filter: blur(2px);
+  display: none;
 }
 
 .heroInner {
@@ -85,12 +80,13 @@
 
 .blockTitle {
   font-size: 1.45rem;
-  font-weight: 800;
-  color: var(--color-primary);
+  font-weight: 850;
+  color: #0A2540;
   margin-bottom: 16px;
   position: relative;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: 12px;
+  border-bottom: 1px solid #EDF2F7;
+  letter-spacing: -0.3px;
 }
 
 .blockTitle::after {
@@ -98,60 +94,336 @@
   position: absolute;
   bottom: -1px;
   left: 0;
-  width: 40px;
-  height: 2px;
-  background-color: var(--color-accent);
+  width: 44px;
+  height: 2.5px;
+  background: linear-gradient(90deg, #F7931E, #EA580C);
+  border-radius: 2px;
 }
 
-.overviewText {
+/* Executive Overview Box */
+.overviewLeadBox {
+  background: linear-gradient(135deg, rgba(247, 147, 30, 0.05) 0%, rgba(10, 37, 64, 0.03) 100%);
+  border-left: 4px solid #F7931E;
+  border-radius: 0 14px 14px 0;
+  padding: 20px 24px;
+  margin-bottom: 26px;
+}
+
+.overviewLeadText {
   font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--color-text-muted);
+  line-height: 1.75;
+  color: #334155;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Features Grid */
+.featuresCardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .featuresCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.featureItemCard {
+  background: #FFFFFF;
+  border: 1.5px solid #EDF2F7;
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(10, 37, 64, 0.03);
+  transition: all 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.featureIconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: rgba(22, 163, 74, 0.12);
+  color: #16A34A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 240ms ease;
+}
+
+.featureItemCard:hover {
+  border-color: rgba(247, 147, 30, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px -4px rgba(247, 147, 30, 0.12), 0 2px 6px rgba(10, 37, 64, 0.05);
+}
+
+.featureItemCard:hover .featureIconWrap {
+  background: linear-gradient(135deg, #F7931E, #EA580C);
+  color: #FFFFFF;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.featureItemText {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0A2540;
+  line-height: 1.4;
+  transition: color 220ms ease;
+}
+
+.featureItemCard:hover .featureItemText {
+  color: #EA580C;
+}
+
+/* Brochure Highlights Cards with Color Change on Hover */
+.brochureGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+@media (min-width: 580px) {
+  .brochureGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 820px) {
+  .brochureGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.brochureHighlightCard {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: default;
+  box-shadow: 0 2px 10px rgba(10, 37, 64, 0.04);
+  transition: all 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.brochureIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(247, 147, 30, 0.12);
+  color: #EA580C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(247, 147, 30, 0.2);
+  transition: all 280ms ease;
+}
+
+.brochureText {
+  font-size: 0.9rem;
+  font-weight: 750;
+  color: #0A2540;
+  line-height: 1.35;
+  transition: color 240ms ease;
+}
+
+/* Interactive Color Change on Hover */
+.brochureHighlightCard:hover {
+  background: linear-gradient(135deg, #0C2340 0%, #07192E 100%);
+  border-color: rgba(247, 147, 30, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px -4px rgba(11, 34, 64, 0.35), 0 4px 10px rgba(247, 147, 30, 0.15);
+}
+
+.brochureHighlightCard:hover .brochureIconWrap {
+  background: linear-gradient(135deg, #F7931E 0%, #EA580C 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: scale(1.12) rotate(-8deg);
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);
+}
+
+.brochureHighlightCard:hover .brochureText {
+  color: #FFFFFF;
+}
+
+.blockHeaderWrap {
+  margin-bottom: 24px;
+}
+
+.blockPill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #EA580C;
+  background: rgba(247, 147, 30, 0.1);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+}
+
+.blockSubtitle {
+  font-size: 0.92rem;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 6px 0 0 0;
 }
 
 /* Sub capabilities cards */
 .subCapsList {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .subCapCard {
-  background-color: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-left: 4px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  padding: 24px;
+  background: #FFFFFF;
+  border: 1.5px solid #EDF2F7;
+  border-radius: 18px;
+  padding: 26px 28px;
+  box-shadow: 0 4px 16px -2px rgba(10, 37, 64, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms ease,
+    border-color 280ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accent top-left line */
+.subCapCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #F7931E, #EA580C);
+  border-radius: 18px 0 0 18px;
+  transition: width 240ms ease;
+}
+
+.subCapCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(247, 147, 30, 0.4);
+  box-shadow: 0 16px 36px -8px rgba(10, 37, 64, 0.1), 0 4px 14px rgba(247, 147, 30, 0.08);
+}
+
+.subCapCard:hover::before {
+  width: 6px;
+}
+
+.subCapHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.subCapNumber {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0A2540 0%, #0F3A66 100%);
+  color: #F7931E;
+  font-size: 1rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(247, 147, 30, 0.3);
+  box-shadow: 0 4px 10px rgba(10, 37, 64, 0.15);
+  transition: all 260ms ease;
+}
+
+.subCapCard:hover .subCapNumber {
+  transform: scale(1.08);
+  border-color: #F7931E;
+  box-shadow: 0 6px 14px rgba(247, 147, 30, 0.25);
+}
+
+.subCapTitleWrap {
+  flex: 1;
 }
 
 .subCapTitle {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 8px;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #0A2540;
+  margin: 0;
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+  transition: color 240ms ease;
+}
+
+.subCapCard:hover .subCapTitle {
+  color: #EA580C;
+}
+
+.subCapCategoryTag {
+  font-size: 0.68rem;
+  font-weight: 750;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #64748B;
+  display: inline-block;
+  margin-top: 3px;
 }
 
 .subCapText {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  margin-bottom: 14px;
+  font-size: 0.94rem;
+  color: #475569;
+  line-height: 1.68;
+  margin: 0 0 16px 0;
+  padding-left: 2px;
+}
+
+.specSection {
+  padding-top: 14px;
+  border-top: 1px dashed #E2E8F0;
 }
 
 .specList {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 9px;
 }
 
 .specBadge {
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #0A2540;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 200ms ease;
+}
+
+.specCheck {
+  color: #16A34A;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.subCapCard:hover .specBadge {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  font-size: 0.8rem;
-  color: var(--color-primary);
-  font-weight: 500;
+  border-color: #CBD5E1;
+  transform: translateY(-1px);
 }
 
 /* Sidebar */
@@ -246,4 +518,78 @@
 
 .contactBtn:hover {
   background-color: var(--color-accent-hover);
+}
+
+/* ── Mobile Responsive Rules ──────────────────────────────── */
+@media (max-width: 768px) {
+  .mainLayout {
+    padding: 40px 0 60px 0;
+    gap: 36px;
+  }
+  .sectionBlock {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .blockTitle {
+    font-size: 1.3rem;
+  }
+  .subCapCard {
+    padding: 22px 20px;
+    border-radius: 16px;
+  }
+  .subCapHeader {
+    gap: 12px;
+  }
+  .subCapNumber {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+  }
+  .subCapTitle {
+    font-size: 1.08rem;
+  }
+  .sidebarCol {
+    gap: 24px;
+  }
+  .sidebarCard {
+    padding: 22px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detailHero {
+    padding: 44px 0 56px 0;
+  }
+  .detailTitle {
+    font-size: 1.75rem;
+  }
+  .detailDesc {
+    font-size: 0.98rem;
+  }
+  .mainLayout {
+    padding: 28px 0 48px 0;
+    gap: 28px;
+  }
+  .sectionBlock {
+    padding: 20px 16px;
+  }
+  .overviewLeadBox {
+    padding: 16px 18px;
+  }
+  .overviewLeadText {
+    font-size: 0.96rem;
+  }
+  .subCapCard {
+    padding: 18px 16px;
+  }
+  .subCapTitle {
+    font-size: 1rem;
+  }
+  .subCapText {
+    font-size: 0.88rem;
+  }
+  .specBadge {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+  }
 }
