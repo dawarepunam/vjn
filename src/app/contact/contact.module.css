@@ -427,12 +427,15 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
+  width: 100%;
+  min-width: 0;
 }
 
 .formRow {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+  width: 100%;
 }
 
 @media (min-width: 600px) {
@@ -449,10 +452,13 @@
 }
 
 .formInput, .formSelect, .formTextarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 12px 16px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-family: inherit;
   color: #FFFFFF;
   background-color: rgba(255, 255, 255, 0.06);
@@ -472,6 +478,13 @@
 
 .formSelect {
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23CBD5E1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
 }
 
 .formSelect option {
@@ -482,6 +495,9 @@
 .formTextarea {
   resize: vertical;
   min-height: 110px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .submitBtn {
