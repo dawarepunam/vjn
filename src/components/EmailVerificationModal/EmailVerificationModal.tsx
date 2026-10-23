@@ -14,7 +14,6 @@ export default function EmailVerificationModal() {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const [demoCode, setDemoCode] = useState<string | null>(null);
 
   const otpInputRefs = [
     useRef<HTMLInputElement>(null),
@@ -56,14 +55,14 @@ export default function EmailVerificationModal() {
   }, [isOpen]);
 
   // Handle Send OTP
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSendOtp = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     setErrorMsg('');
 
     const emailClean = email.trim().toLowerCase();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailClean || !emailRegex.test(emailClean)) {
-      setErrorMsg('कृपया वैध ईमेल पत्ता प्रविष्ट करा (Valid Email Address).');
+      setErrorMsg('Please enter a valid business or personal email address.');
       return;
     }
 
@@ -78,15 +77,12 @@ export default function EmailVerificationModal() {
 
       if (data.success) {
         setStep('otp');
-        if (data.demoOtp) {
-          setDemoCode(data.demoOtp);
-        }
         setTimeout(() => otpInputRefs[0].current?.focus(), 150);
       } else {
-        setErrorMsg(data.message || 'Error sending code.');
+        setErrorMsg(data.message || 'Unable to send verification code. Please check your email.');
       }
     } catch {
-      setErrorMsg('Network error. Please try again.');
+      setErrorMsg('Network connectivity issue. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -94,7 +90,6 @@ export default function EmailVerificationModal() {
 
   // Handle OTP digit changes
   const handleOtpChange = (index: number, value: string) => {
-    // Only accept numeric digit
     const cleaned = value.replace(/\D/g, '');
     const newOtp = [...otp];
 
@@ -108,7 +103,7 @@ export default function EmailVerificationModal() {
     newOtp[index] = cleaned[cleaned.length - 1];
     setOtp(newOtp);
 
-    // Auto advance
+    // Auto advance to next input
     if (index < 3 && cleaned) {
       otpInputRefs[index + 1].current?.focus();
     }
@@ -127,7 +122,7 @@ export default function EmailVerificationModal() {
 
     const code = otp.join('');
     if (code.length !== 4) {
-      setErrorMsg('कृपया ४-अंकी व्हेरिफिकेशन कोड प्रविष्ट करा.');
+      setErrorMsg('Please enter the complete 4-digit verification code.');
       return;
     }
 
@@ -153,11 +148,11 @@ export default function EmailVerificationModal() {
         // After success animation, close verification modal and trigger QuoteSliderModal
         setTimeout(() => {
           setIsOpen(false);
-          // Trigger the quotes modal immediately
+          // Trigger the project quotes modal immediately
           window.dispatchEvent(new CustomEvent('open-quote-slider-modal'));
         }, 1200);
       } else {
-        setErrorMsg(data.message || 'अवैध कोड! कृपया तपासा.');
+        setErrorMsg(data.message || 'Invalid code. Please check the code sent to your email.');
       }
     } catch {
       setErrorMsg('Network error. Please try again.');
@@ -178,7 +173,7 @@ export default function EmailVerificationModal() {
             <div className={styles.badgeRow}>
               <div className={styles.securityBadge}>
                 <Lock size={12} />
-                <span>Client Verification</span>
+                <span>Verified Client Access</span>
               </div>
               <div className={styles.stepIndicator}>
                 Step {step === 'email' ? '1 of 2' : '2 of 2'}
@@ -190,10 +185,10 @@ export default function EmailVerificationModal() {
           {step === 'email' && (
             <>
               <h3 id="verify-modal-title" className={styles.title}>
-                स्वागत आहे! <span>M/s JNP Infra</span>
+                Welcome to <span>JNP Infra Eng Works</span>
               </h3>
               <p className={styles.subtitle}>
-                प्रोजेक्ट कोट्स, दर आणि इंजिनिअरिंग कंत्राट तपशील पाहण्यासाठी कृपया आपला ईमेल व्हेरिफाय करा.
+                Please verify your email address to unlock official project quotation estimates, rate sheets, and engineering portfolio.
               </p>
 
               {errorMsg && (
@@ -206,13 +201,13 @@ export default function EmailVerificationModal() {
               <form onSubmit={handleSendOtp} className={styles.form}>
                 <div className={styles.fieldGroup}>
                   <label className={styles.label}>
-                    <span>आपले नाव / कंपनी नाव (Full Name)</span>
+                    <span>Your Name / Company Name</span>
                   </label>
                   <div className={styles.inputWrapper}>
                     <input
                       type="text"
                       className={styles.input}
-                      placeholder="e.g. Rahul Patil / Infra Tech Pvt Ltd"
+                      placeholder="e.g. Rajesh Kumar / Larsen &amp; Toubro"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                     />
@@ -221,7 +216,7 @@ export default function EmailVerificationModal() {
 
                 <div className={styles.fieldGroup}>
                   <label className={styles.label}>
-                    <span>अधिकृत ईमेल (Business / Personal Email) *</span>
+                    <span>Official Email Address *</span>
                   </label>
                   <div className={styles.inputWrapper}>
                     <div className={styles.inputIcon}>
@@ -247,7 +242,7 @@ export default function EmailVerificationModal() {
                   {loading ? (
                     <>
                       <RefreshCw size={18} className="animate-spin" />
-                      <span>कोड पाठवत आहे...</span>
+                      <span>Sending Verification Code...</span>
                     </>
                   ) : (
                     <>
@@ -264,18 +259,11 @@ export default function EmailVerificationModal() {
           {step === 'otp' && (
             <>
               <h3 id="verify-modal-title" className={styles.title}>
-                Enter <span>4-Digit OTP</span>
+                Enter <span>4-Digit Verification Code</span>
               </h3>
               <p className={styles.subtitle}>
-                व्हेरिफिकेशन कोड <strong>{email}</strong> वर पाठवला आहे.
+                We have sent a 4-digit code to <strong>{email}</strong>. Please check your inbox or spam folder.
               </p>
-
-              {demoCode && (
-                <div className={styles.demoBanner}>
-                  <span>Access Code:</span>
-                  <span className={styles.demoCode}>{demoCode}</span>
-                </div>
-              )}
 
               {errorMsg && (
                 <div className={styles.errorBanner} style={{ marginBottom: 14 }}>
@@ -310,12 +298,12 @@ export default function EmailVerificationModal() {
                   {loading ? (
                     <>
                       <RefreshCw size={18} className="animate-spin" />
-                      <span>तपासत आहे...</span>
+                      <span>Verifying Code...</span>
                     </>
                   ) : (
                     <>
                       <ShieldCheck size={18} />
-                      <span>Verify &amp; Continue</span>
+                      <span>Verify &amp; Unlock Quotes</span>
                     </>
                   )}
                 </button>
@@ -330,16 +318,16 @@ export default function EmailVerificationModal() {
                     }}
                     className={styles.textBtn}
                   >
-                    ← चेंज ईमेल (Change Email)
+                    ← Change Email
                   </button>
 
                   <button
                     type="button"
-                    onClick={handleSendOtp}
+                    onClick={() => handleSendOtp()}
                     disabled={loading}
                     className={styles.textBtn}
                   >
-                    कोड पुन्हा पाठवा (Resend)
+                    Resend Code
                   </button>
                 </div>
               </form>
@@ -352,13 +340,13 @@ export default function EmailVerificationModal() {
               <div className={styles.successIcon}>
                 <CheckCircle2 size={38} />
               </div>
-              <h3 className={styles.successTitle}>ईमेल व्हेरिफाय झाले!</h3>
+              <h3 className={styles.successTitle}>Email Verified Successfully!</h3>
               <p className={styles.successText}>
-                धन्यवाद! आता तुम्ही JNP Infra चे प्रोजेक्ट कोट्स आणि अंदाजपत्रक थेट पाहू शकता.
+                Welcome aboard. Loading JNP Infra Eng Works project quotation rates...
               </p>
               <div className={styles.nextLoading}>
                 <RefreshCw size={16} className="animate-spin" />
-                <span>Loading Project Quotes...</span>
+                <span>Opening Project Estimates...</span>
               </div>
             </div>
           )}

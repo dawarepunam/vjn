@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
       return NextResponse.json(
-        { success: false, message: 'कृपया वैध ईमेल पत्ता प्रविष्ट करा (Please enter a valid email).' },
+        { success: false, message: 'Please provide a valid official email address.' },
         { status: 400 }
       );
     }
@@ -66,26 +66,28 @@ export async function POST(request: Request) {
             to: email,
             subject: `${otp} is your Verification Code - JNP Infra Eng Works`,
             html: `
-              <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
-                <div style="text-align: center; margin-bottom: 20px;">
+              <div style="font-family: Arial, sans-serif; max-width: 520px; margin: 0 auto; padding: 28px; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
+                <div style="text-align: center; margin-bottom: 24px;">
                   <h2 style="color: #0B192C; margin: 0; font-size: 22px;">M/s JNP Infra Eng Works</h2>
-                  <p style="color: #F59E0B; margin: 4px 0 0 0; font-size: 13px; font-weight: bold; text-transform: uppercase;">Engineering with Precision</p>
+                  <p style="color: #F59E0B; margin: 4px 0 0 0; font-size: 13px; font-weight: bold; text-transform: uppercase;">Engineering with Precision. Execution with Responsibility.</p>
                 </div>
-                <div style="background: #f8fafc; border-radius: 8px; padding: 20px; text-align: center; margin-bottom: 20px;">
+                <div style="background: #f8fafc; border-radius: 8px; padding: 24px; text-align: center; margin-bottom: 20px; border: 1px solid #f1f5f9;">
                   <p style="color: #475569; margin: 0 0 10px 0; font-size: 14px;">Your One-Time Access Verification Code is:</p>
-                  <div style="font-size: 32px; font-weight: 900; letter-spacing: 8px; color: #0B192C; padding: 8px 0;">${otp}</div>
-                  <p style="color: #94a3b8; font-size: 12px; margin: 8px 0 0 0;">Valid for 10 minutes. Please do not share this code with anyone.</p>
+                  <div style="font-size: 34px; font-weight: 900; letter-spacing: 8px; color: #0B192C; padding: 10px 0;">${otp}</div>
+                  <p style="color: #94a3b8; font-size: 12px; margin: 8px 0 0 0;">Valid for 10 minutes. Please do not share this code.</p>
                 </div>
-                <p style="color: #64748b; font-size: 13px; line-height: 1.5; margin: 0;">
-                  Thank you for visiting JNP Infra Eng Works. Once verified, you will have complete access to project quotation estimates and engineering portfolios.
+                <p style="color: #64748b; font-size: 13px; line-height: 1.55; margin: 0 0 16px 0;">
+                  Thank you for visiting JNP Infra Eng Works. Once verified, you will have immediate access to project quotation rates, equipment specifications, and turnkey engineering portfolios.
                 </p>
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 14px; font-size: 11px; color: #94a3b8; text-align: center;">
+                  M/s JNP Infra Eng Works · Pune, Maharashtra · www.jnpinfraworks.com
+                </div>
               </div>
             `,
           });
           sentViaEmail = true;
         } catch (emailErr) {
           console.error('[SMTP Send Error]', emailErr);
-          // Don't fail the user flow if SMTP credentials fail; fallback will provide dev code
         }
       }
 
@@ -94,11 +96,9 @@ export async function POST(request: Request) {
       return NextResponse.json({
         success: true,
         message: sentViaEmail 
-          ? `व्हेरिफिकेशन कोड ${email} वर पाठवला आहे.`
-          : `व्हेरिफिकेशन कोड तयार केला आहे.`,
+          ? `Verification code has been dispatched to ${email}.`
+          : `Verification code generated.`,
         email,
-        // In local development or if SMTP not yet bound, deliver otp in response so testing is smooth
-        demoOtp: !sentViaEmail ? otp : undefined,
       });
     }
 
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
       const code = (body.code || '').trim();
       if (!code) {
         return NextResponse.json(
-          { success: false, message: 'कृपया ४-अंकी व्हेरिफिकेशन कोड टाका.' },
+          { success: false, message: 'Please enter the 4-digit code.' },
           { status: 400 }
         );
       }
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
       const record = otpStore.get(email);
       if (!record) {
         return NextResponse.json(
-          { success: false, message: 'कोणताही कोड सापडला नाही. कृपया पुन्हा "Resend Code" वर क्लिक करा.' },
+          { success: false, message: 'No active code found for this email. Please click "Resend Code".' },
           { status: 400 }
         );
       }
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
       if (Date.now() > record.expiresAt) {
         otpStore.delete(email);
         return NextResponse.json(
-          { success: false, message: 'हा कोड कालबाह्य (Expired) झाला आहे. कृपया नवीन कोड मागवा.' },
+          { success: false, message: 'The verification code has expired. Please request a new one.' },
           { status: 400 }
         );
       }
@@ -132,12 +132,12 @@ export async function POST(request: Request) {
         if (record.attempts >= 5) {
           otpStore.delete(email);
           return NextResponse.json(
-            { success: false, message: 'खूप वेळा चुकीचा कोड टाकला आहे. कृपया नवीन कोड मागवा.' },
+            { success: false, message: 'Too many incorrect attempts. Please request a new code.' },
             { status: 400 }
           );
         }
         return NextResponse.json(
-          { success: false, message: 'अवैध कोड! कृपया योग्य ४-अंकी कोड तपासा.' },
+          { success: false, message: 'Invalid verification code. Please check your email inbox.' },
           { status: 400 }
         );
       }
@@ -146,19 +146,19 @@ export async function POST(request: Request) {
       otpStore.delete(email);
       return NextResponse.json({
         success: true,
-        message: 'ईमेल व्हेरिफिकेशन यशस्वी झाले!',
+        message: 'Email verified successfully.',
         verifiedEmail: email,
       });
     }
 
     return NextResponse.json(
-      { success: false, message: 'अवैध विनंती (Invalid action).' },
+      { success: false, message: 'Invalid request action.' },
       { status: 400 }
     );
   } catch (error) {
     console.error('[OTP Route Error]', error);
     return NextResponse.json(
-      { success: false, message: 'सर्व्हर एरर. कृपया पुन्हा प्रयत्न करा.' },
+      { success: false, message: 'Internal server error. Please try again.' },
       { status: 500 }
     );
   }
