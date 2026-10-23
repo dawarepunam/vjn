@@ -577,6 +577,97 @@
   font-weight: 700;
 }
 
+/* ── Social Media Row ────────────────────────────────────────── */
+.socialLinksRow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: all 200ms ease;
+  cursor: pointer;
+}
+
+.socialBtn svg {
+  flex-shrink: 0;
+  transition: transform 200ms ease;
+}
+
+.socialBtn:hover svg {
+  transform: scale(1.1);
+}
+
+/* LinkedIn */
+.socialLinkedIn {
+  background: rgba(10, 102, 194, 0.08);
+  color: #0A66C2;
+  border-color: rgba(10, 102, 194, 0.2);
+}
+
+.socialLinkedIn:hover {
+  background: #0A66C2;
+  color: #FFFFFF;
+  border-color: #0A66C2;
+  box-shadow: 0 4px 14px rgba(10, 102, 194, 0.35);
+  transform: translateY(-2px);
+}
+
+/* WhatsApp */
+.socialWhatsApp {
+  background: rgba(37, 211, 102, 0.08);
+  color: #128C7E;
+  border-color: rgba(37, 211, 102, 0.25);
+}
+
+.socialWhatsApp:hover {
+  background: #25D366;
+  color: #FFFFFF;
+  border-color: #25D366;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Instagram */
+.socialInstagram {
+  background: rgba(225, 48, 108, 0.08);
+  color: #C13584;
+  border-color: rgba(225, 48, 108, 0.2);
+}
+
+.socialInstagram:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(225, 48, 108, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Facebook */
+.socialFacebook {
+  background: rgba(24, 119, 242, 0.08);
+  color: #1877F2;
+  border-color: rgba(24, 119, 242, 0.2);
+}
+
+.socialFacebook:hover {
+  background: #1877F2;
+  color: #FFFFFF;
+  border-color: #1877F2;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35);
+  transform: translateY(-2px);
+}
+
 /* Panel Footer */
 .panelFooter {
   padding: 16px 24px;
