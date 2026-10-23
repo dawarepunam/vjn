@@ -17,16 +17,19 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const firstCardRef = useRef<HTMLButtonElement | null>(null);
 
-  // Lock body scroll when panel open
+  // Lock body & HTML scroll when panel open to remove main window scrollbar
   useEffect(() => {
     if (activeClient) {
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
       // Move focus to close button for keyboard users
       setTimeout(() => closeBtnRef.current?.focus(), 50);
     } else {
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     }
     return () => {
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     };
   }, [activeClient]);

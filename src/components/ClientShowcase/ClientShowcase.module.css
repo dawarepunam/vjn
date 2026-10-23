@@ -438,11 +438,30 @@
 .panelBody {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   background-color: #FAFCFE;
+}
+
+/* Custom sleek scrollbar for side panel */
+.panelBody::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panelBody::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panelBody::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+.panelBody::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
 }
 
 /* Content block within panel */
