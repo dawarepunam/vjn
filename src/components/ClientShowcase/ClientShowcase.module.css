@@ -226,7 +226,7 @@
   position: fixed;
   inset: 0;
   background-color: rgba(6, 22, 38, 0.55);
-  z-index: 2000;
+  z-index: 9995;
   opacity: 0;
   visibility: hidden;
   transition: opacity 300ms ease, visibility 300ms ease;
@@ -247,7 +247,7 @@
   bottom: 0;
   width: min(520px, 92vw);
   background-color: #FFFFFF;
-  z-index: 2100;
+  z-index: 9996;
   box-shadow: -12px 0 50px rgba(10, 37, 64, 0.22);
   display: flex;
   flex-direction: column;

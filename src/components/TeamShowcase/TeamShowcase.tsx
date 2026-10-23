@@ -247,7 +247,7 @@ export default function TeamShowcase() {
                   onClick={closePanel}
                   aria-label="Close partner profile panel"
                 >
-                  <X size={18} />
+                  <X size={22} strokeWidth={2.5} />
                 </button>
               </div>
 
