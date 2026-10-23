@@ -5,6 +5,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import EnquiryModal from '@/components/EnquiryModal/EnquiryModal';
 import QuoteSliderModal from '@/components/QuoteSliderModal/QuoteSliderModal';
+import EmailVerificationModal from '@/components/EmailVerificationModal/EmailVerificationModal';
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <EnquiryModal />
+        <EmailVerificationModal />
         <QuoteSliderModal />
       </body>
     </html>

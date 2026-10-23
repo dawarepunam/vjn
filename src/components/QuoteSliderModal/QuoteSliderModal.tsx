@@ -120,13 +120,22 @@ export default function QuoteSliderModal() {
     setIsDetailedEnquiryOpen(false);
   };
 
-  // Automatic trigger on EVERY hard refresh / newly opened site after 3.5 seconds
+  // Trigger quote modal: If already verified, open after 1.5s; otherwise wait for email verification event
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 3500);
+    // If user already completed verification in this session, show quotes
+    try {
+      const isVerified = sessionStorage.getItem('jnp_infra_email_verified');
+      if (isVerified) {
+        const timer = setTimeout(() => {
+          setIsOpen(true);
+        }, 1500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // ignore
+    }
 
     const handleCustomTrigger = () => {
       openModal();
@@ -135,7 +144,6 @@ export default function QuoteSliderModal() {
     window.addEventListener('open-quote-slider-modal', handleCustomTrigger);
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('open-quote-slider-modal', handleCustomTrigger);
     };
   }, [openModal]);
