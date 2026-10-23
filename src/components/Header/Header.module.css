@@ -5,21 +5,23 @@
 
 /* ─── Header Shell ─── */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
+  left: 0;
+  right: 0;
+  z-index: 9990;
   width: 100%;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(11, 34, 64, 0.06);
+  border-bottom: 1px solid rgba(11, 34, 64, 0.08);
   transition: background 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
 }
 
 .scrolled {
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 4px 24px rgba(11, 34, 64, 0.08), 0 1px 4px rgba(11, 34, 64, 0.04);
-  border-bottom-color: rgba(11, 34, 64, 0.1);
+  border-bottom-color: rgba(11, 34, 64, 0.12);
 }
 
 /* ─── Inner Nav Row ─── */
@@ -294,18 +296,37 @@
 
 /* ─── Quote Button ─── */
 .quoteBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: linear-gradient(135deg, #F7931E 0%, #EA580C 100%);
-  color: #FFFFFF;
-  font-size: 0.875rem;
-  font-weight: 650;
-  padding: 10px 20px;
-  border-radius: 9px;
-  box-shadow: 0 2px 10px rgba(247, 147, 30, 0.35);
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  gap: 8px;
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: #061121;
+  font-size: 0.86rem;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
+  overflow: hidden;
+}
+
+.quoteBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.quoteBtn:hover::after {
+  left: 180%;
+  transition: all 650ms ease;
 }
 
 @media (max-width: 959px) {
@@ -316,7 +337,8 @@
 
 .quoteBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(247, 147, 30, 0.45);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.45);
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
 }
 
 .quoteBtn:active {

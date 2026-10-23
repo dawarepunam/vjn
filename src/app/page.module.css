@@ -42,43 +42,54 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(253, 186, 116, 0.35);
   color: #FDBA74;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: var(--radius-pill);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
   margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: badgeGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes badgeGlow {
+  0% { border-color: rgba(253, 186, 116, 0.3); box-shadow: 0 0 10px rgba(224, 122, 43, 0.1); }
+  100% { border-color: rgba(253, 186, 116, 0.6); box-shadow: 0 0 20px rgba(224, 122, 43, 0.25); }
 }
 
 .heroHeading {
-  font-size: clamp(1.8rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 850;
   line-height: 1.15;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.03em;
   margin-bottom: 20px;
   color: #FFFFFF;
 }
 
 .heroHeadingHighlight {
   color: var(--color-accent);
+  background: linear-gradient(135deg, #FDBA74 0%, #E07A2B 60%, #EA580C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .heroSubtitle {
-  font-size: clamp(0.95rem, 2vw, 1.125rem);
-  line-height: 1.65;
+  font-size: clamp(0.98rem, 2vw, 1.15rem);
+  line-height: 1.7;
   color: #E2E8F0;
-  margin-bottom: 36px;
+  margin-bottom: 38px;
   max-width: 650px;
 }
 
 .heroCtaGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 14px;
   align-items: center;
 }
 
@@ -95,57 +106,94 @@
 }
 
 .heroPrimaryBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+  background: linear-gradient(135deg, #E07A2B 0%, #C25E17 100%);
   color: #FFFFFF;
-  font-weight: 600;
-  padding: 14px 28px;
+  font-weight: 700;
+  padding: 15px 30px;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 14px rgba(224, 122, 43, 0.45);
-  transition: all var(--transition-fast);
+  box-shadow: 0 8px 24px rgba(224, 122, 43, 0.4);
+  transition: all 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.heroPrimaryBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  transition: none;
+}
+
+.heroPrimaryBtn:hover::after {
+  left: 180%;
+  transition: all 750ms ease;
 }
 
 .heroPrimaryBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(224, 122, 43, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(224, 122, 43, 0.55);
 }
 
 .heroSecondaryBtn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #FFFFFF;
-  font-weight: 600;
-  padding: 14px 24px;
+  font-weight: 700;
+  padding: 15px 26px;
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition: all 240ms ease;
 }
 
 .heroSecondaryBtn:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
 }
 
 .heroTrustRow {
   margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 12px;
   align-items: center;
-  font-size: 0.8125rem;
-  color: #CBD5E0;
 }
 
 .trustItem {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  transition: all 200ms ease;
+}
+
+.trustItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(224, 122, 43, 0.5);
+  color: #FFFFFF;
+  transform: translateY(-2px);
 }
 
 /* SECTION HEADERS */
@@ -308,22 +356,25 @@
 
 .serviceCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1.5px solid rgba(10, 37, 64, 0.08);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 18px rgba(10, 37, 64, 0.04);
+  position: relative;
 }
 
 .serviceCard:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--color-accent);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -10px rgba(10, 37, 64, 0.12),
+              0 0 0 1px rgba(224, 122, 43, 0.4);
+  border-color: rgba(224, 122, 43, 0.5);
 }
 
 .serviceCardImageWrapper {
-  height: 190px;
+  height: 200px;
   overflow: hidden;
   position: relative;
 }
@@ -332,24 +383,27 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-smooth);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .serviceCard:hover .serviceCardImage {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .serviceCardBadge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: rgba(10, 37, 64, 0.85);
+  top: 14px;
+  left: 14px;
+  background-color: rgba(6, 22, 38, 0.85);
   color: #FFFFFF;
   font-size: 0.72rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  backdrop-filter: blur(4px);
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.4px;
 }
 
 .serviceCardBody {
@@ -360,24 +414,30 @@
 }
 
 .serviceCardTitle {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--color-primary);
   margin-bottom: 10px;
   line-height: 1.3;
+  letter-spacing: -0.3px;
+  transition: color 200ms ease;
+}
+
+.serviceCard:hover .serviceCardTitle {
+  color: var(--color-accent);
 }
 
 .serviceCardText {
-  font-size: 0.875rem;
+  font-size: 0.88rem;
   color: var(--color-text-muted);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 18px;
   flex: 1;
 }
 
 .serviceCardSubItems {
   list-style: none;
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
   padding-top: 14px;
   margin-bottom: 20px;
   display: flex;

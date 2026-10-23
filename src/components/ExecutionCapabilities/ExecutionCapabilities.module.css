@@ -163,9 +163,11 @@
 
 /* ── CARD HOVER EFFECTS (Upward lift + subtle orange border & glow) ── */
 .capabilityCard:hover {
-  transform: translateY(-6px) scale(1.01) !important;
-  border-color: var(--color-accent, #E07A2B);
-  box-shadow: 0 20px 25px -5px rgba(10, 37, 64, 0.1), 0 10px 10px -5px rgba(224, 122, 43, 0.12);
+  transform: translateY(-8px) scale(1.015) !important;
+  border-color: rgba(224, 122, 43, 0.6);
+  box-shadow: 0 24px 38px -12px rgba(10, 37, 64, 0.14),
+              0 0 0 1px rgba(224, 122, 43, 0.25),
+              0 8px 16px -4px rgba(224, 122, 43, 0.15);
 }
 
 /* ── Image Frame with Fixed Aspect Ratio (16:10) ── */

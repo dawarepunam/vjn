@@ -83,6 +83,13 @@ main {
   flex: 1 0 auto;
   overflow-x: hidden;
   width: 100%;
+  padding-top: 72px;
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 60px;
+  }
 }
 
 img {

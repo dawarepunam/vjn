@@ -22,7 +22,6 @@ import ExecutionCapabilities from '@/components/ExecutionCapabilities/ExecutionC
 import ProcessTimeline from '@/components/ProcessTimeline/ProcessTimeline';
 import OperationalCapability from '@/components/OperationalCapability/OperationalCapability';
 import CompanyProfile from '@/components/CompanyProfile/CompanyProfile';
-import MetricCounterStrip from '@/components/MetricCounterStrip/MetricCounterStrip';
 import { 
   COMPANY_CONTACT, 
   SERVICES_DATA, 
@@ -89,9 +88,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* METRIC COUNTER STRIP — PREMIUM LIVE ANIMATED STATS */}
-      <MetricCounterStrip />
 
       {/* SECTION 2: COMPANY PROFILE — PREMIUM */}
       <CompanyProfile />
