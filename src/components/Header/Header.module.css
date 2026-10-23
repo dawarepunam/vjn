@@ -11,11 +11,17 @@
   right: 0;
   z-index: 9990;
   width: 100%;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(11, 34, 64, 0.08);
+  /* iPhone notch & Dynamic Island safe area support */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
   transition: background 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .scrolled {
@@ -28,19 +34,28 @@
 .navInner {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 24px;
   height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
 }
 
 @media (max-width: 640px) {
   .navInner {
-    padding: 0 14px;
+    padding: 0 16px;
     height: 60px;
-    gap: 12px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 375px) {
+  /* iPhone SE (1st, 2nd, 3rd gen) and compact screens */
+  .navInner {
+    padding: 0 12px;
+    height: 56px;
+    gap: 8px;
   }
 }
 
@@ -51,6 +66,7 @@
   text-decoration: none;
   flex-shrink: 0;
   max-width: 170px;
+  -webkit-tap-highlight-color: transparent;
   transition: opacity 220ms ease;
 }
 
@@ -68,11 +84,21 @@
 
 @media (max-width: 480px) {
   .brandLink {
-    max-width: 145px;
+    max-width: 140px;
   }
 
   .headerLogoImg {
-    height: 34px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 375px) {
+  .brandLink {
+    max-width: 125px;
+  }
+
+  .headerLogoImg {
+    height: 28px;
   }
 }
 
@@ -350,19 +376,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 9px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 10px;
   background: rgba(11, 34, 64, 0.06);
   color: #0B2240;
   border: 1px solid rgba(11, 34, 64, 0.1);
-  transition: background 200ms ease;
+  transition: background 200ms ease, transform 150ms ease;
   cursor: pointer;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .mobileMenuToggle:hover {
   background: rgba(11, 34, 64, 0.12);
+}
+
+.mobileMenuToggle:active {
+  background: rgba(11, 34, 64, 0.18);
+  transform: scale(0.95);
 }
 
 @media (min-width: 960px) {
@@ -376,12 +413,14 @@
   position: fixed;
   inset: 0;
   background: rgba(5, 15, 30, 0.65);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 9998;
   opacity: 0;
   visibility: hidden;
   transition: opacity 280ms ease, visibility 0ms 280ms;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 .mobileOverlayVisible {
@@ -396,31 +435,43 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: 86%;
-  max-width: 320px;
+  height: 100vh;
+  height: 100dvh; /* Dynamic viewport height for iOS Safari URL bar collapse */
+  width: min(86%, 330px);
   background: #FFFFFF;
   z-index: 9999;
   box-shadow: -10px 0 50px rgba(0, 0, 0, 0.28);
-  transform: translateX(100%);
+  transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
   transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
+  /* iPhone safe area handling */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: max(16px, env(safe-area-inset-bottom, 0px));
 }
 
 .mobileDrawerOpen {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .mobileDrawerHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
-  border-bottom: 2px solid #F1F5F9;
-  min-height: 64px;
+  padding: 12px 18px;
+  border-bottom: 1px solid #E2E8F0;
+  min-height: 60px;
   background: #FFFFFF;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex-shrink: 0;
 }
 
 .mobileCloseBtn {
@@ -467,23 +518,27 @@
   font-weight: 600;
   color: #3D4A5C;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: background 180ms ease, color 180ms ease;
 }
 
-.mobileNavLink:hover {
+.mobileNavLink:hover,
+.mobileNavLink:active {
   background: #F8FAFC;
   color: #0B2240;
 }
 
 .mobileNavLinkActive {
   color: #F7931E;
-  background: rgba(247, 147, 30, 0.06);
+  background: rgba(247, 147, 30, 0.08);
 }
 
 .mobileNavAccordion {
   width: 100%;
   text-align: left;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .mobileSubmenu {
@@ -494,17 +549,20 @@
 }
 
 .mobileSubmenuLink {
-  padding: 9px 12px;
+  padding: 10px 12px;
   font-size: 0.875rem;
   font-weight: 500;
   color: #64748B;
   border-radius: 7px;
   border-left: 2px solid #E2E8F0;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
 }
 
-.mobileSubmenuLink:hover {
+.mobileSubmenuLink:hover,
+.mobileSubmenuLink:active {
   border-left-color: #F7931E;
   color: #0B2240;
   background: #F8FAFC;
@@ -515,18 +573,21 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 12px 0 0 0;
-  padding: 13px 20px;
+  margin: 14px 0 10px 0;
+  padding: 14px 20px;
   border-radius: 10px;
   background: linear-gradient(135deg, #F7931E 0%, #EA580C 100%);
   color: #FFFFFF;
   font-size: 0.9375rem;
   font-weight: 700;
   box-shadow: 0 4px 14px rgba(247, 147, 30, 0.35);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition: transform 200ms ease, box-shadow 200ms ease;
 }
 
-.mobileQuoteBtn:hover {
+.mobileQuoteBtn:hover,
+.mobileQuoteBtn:active {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(247, 147, 30, 0.45);
 }

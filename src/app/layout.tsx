@@ -14,6 +14,14 @@ const plusJakarta = Plus_Jakarta_Sans({
   display: 'swap',
 });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+  themeColor: '#ffffff',
+};
+
 export const metadata: Metadata = {
   title: 'M/s JNP Infra Eng Works | Engineering with Precision. Execution with Responsibility.',
   description: 'Specialized infrastructure contractor executing HDPE butt fusion, DI pipelines, solar DTH piling, water storage tanks, and heavy structural steel fabrication across India.',

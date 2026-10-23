@@ -36,18 +36,29 @@ export default function Header() {
     setServicesDropdownOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile drawer is open (iOS Safari needs both html + body)
+  // Lock body scroll when mobile drawer is open (iOS Safari safe-lock)
   useEffect(() => {
     if (mobileMenuOpen) {
+      const scrollY = window.scrollY;
+      document.body.dataset.scrollY = scrollY.toString();
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
+      // Prevent touchmove bounce behind drawer on iOS
+      document.body.style.touchAction = 'none';
     } else {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+      const prevScroll = document.body.dataset.scrollY;
+      if (prevScroll) {
+        window.scrollTo(0, parseInt(prevScroll, 10));
+        delete document.body.dataset.scrollY;
+      }
     }
     return () => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
+      document.body.style.touchAction = '';
     };
   }, [mobileMenuOpen]);
 
