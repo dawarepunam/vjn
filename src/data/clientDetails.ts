@@ -1,3 +1,11 @@
+export interface ExecutedWork {
+  title: string;
+  scope: string;
+  location?: string;
+  image: string;
+  tag: string;
+}
+
 export interface ClientDetailData {
   id: string;
   name: string;
@@ -12,6 +20,7 @@ export interface ClientDetailData {
   overview: string;
   relevantJNPServices: string[];
   projectNote: string;
+  executedWorks?: ExecutedWork[];
 }
 
 export const CLIENT_DETAILS: ClientDetailData[] = [
@@ -35,7 +44,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Land Leveling using JCB / Hitachi"
     ],
     projectNote:
-      "Project details to be added. JNP Infra Eng Works provides civil and mechanical execution support for solar infrastructure within Tata Power Solar project scopes."
+      "JNP Infra Eng Works provides civil and mechanical execution support for solar infrastructure within Tata Power Solar project scopes.",
+    executedWorks: [
+      {
+        title: "Solar Park Ground Piling",
+        scope: "DTH Rock Piling & Tractor Auger for solar panel foundations across multiple MW blocks",
+        location: "Rajasthan",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling"
+      },
+      {
+        title: "MMS Structure Installation",
+        scope: "Module Mounting Structure (MMS) assembly and alignment for 50 MW solar park",
+        location: "Gujarat",
+        image: "/images/machinery-work.jpg",
+        tag: "MMS"
+      }
+    ]
   },
   {
     id: "lt-solar",
@@ -55,7 +80,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Galvanized Perimeter Fencing"
     ],
     projectNote:
-      "Project details to be added. JNP Infra Eng Works provides ground-level solar civil execution support within L&T renewable project scopes."
+      "JNP Infra Eng Works provides ground-level solar civil execution support within L&T renewable project scopes.",
+    executedWorks: [
+      {
+        title: "Solar Foundation Piling Works",
+        scope: "Tractor Auger & DTH piling for pile foundation across 75 MW solar field",
+        location: "Madhya Pradesh",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling"
+      },
+      {
+        title: "Perimeter Security Fencing",
+        scope: "Galvanized steel mesh boundary fencing installation for solar park perimeter security",
+        location: "Rajasthan",
+        image: "/images/crash-barrier.jpg",
+        tag: "Fencing"
+      }
+    ]
   },
   {
     id: "waaree",
@@ -75,7 +116,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Site Land Leveling"
     ],
     projectNote:
-      "Project details to be added. JNP Infra Eng Works supports Waaree's ground-mounted solar execution with piling and MMS installation capability."
+      "JNP Infra Eng Works supports Waaree's ground-mounted solar execution with piling and MMS installation capability.",
+    executedWorks: [
+      {
+        title: "Ground Piling & MMS Assembly",
+        scope: "Tractor Auger piling & complete MMS structure assembly for Waaree utility-scale solar",
+        location: "Maharashtra",
+        image: "/images/solar-infra.jpg",
+        tag: "MMS & Piling"
+      },
+      {
+        title: "Land Leveling Operations",
+        scope: "JCB & Hitachi machinery land leveling and site grading for solar park preparation",
+        location: "Telangana",
+        image: "/images/machinery-work.jpg",
+        tag: "Civil"
+      }
+    ]
   },
   {
     id: "sterling-wilson",
@@ -95,7 +152,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Safety Boundary Galvanized Mesh"
     ],
     projectNote:
-      "Project details to be added. JNP Infra provides specialized piling and MMS civil works in Sterling & Wilson project execution areas."
+      "JNP Infra provides specialized piling and MMS civil works in Sterling & Wilson project execution areas.",
+    executedWorks: [
+      {
+        title: "DTH Hard Rock Piling",
+        scope: "Down-the-hole (DTH) drilling & piling for hard-rock terrain solar foundations",
+        location: "Karnataka",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling"
+      },
+      {
+        title: "ICR Structural Fabrication",
+        scope: "Inverter Control Room (ICR) structural fabrication and erection on site",
+        location: "Andhra Pradesh",
+        image: "/images/heavy-fab.jpg",
+        tag: "Fabrication"
+      }
+    ]
   },
   {
     id: "mahindra-susten",
@@ -115,7 +188,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Galvanized Safety Fencing"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides civil execution support within Mahindra Susten project scopes.",
+    executedWorks: [
+      {
+        title: "Solar Park Civil Works",
+        scope: "Complete piling, MMS assembly and boundary safety fencing for utility-scale solar project",
+        location: "Rajasthan",
+        image: "/images/solar-infra.jpg",
+        tag: "Civil & MMS"
+      },
+      {
+        title: "Site Grading & Land Leveling",
+        scope: "Large-scale terrain leveling and grading using JCB & Hitachi machinery",
+        location: "Gujarat",
+        image: "/images/machinery-work.jpg",
+        tag: "Civil"
+      }
+    ]
   },
   {
     id: "jakson-green",
@@ -135,7 +224,16 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Land Grading"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides foundation piling and MMS execution support in Jakson Green project scopes.",
+    executedWorks: [
+      {
+        title: "Foundation Piling & MMS",
+        scope: "DTH & Auger piling, MMS installation and perimeter mesh for renewable energy park",
+        location: "Uttar Pradesh",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling & MMS"
+      }
+    ]
   },
   {
     id: "adani-renewables",
@@ -155,7 +253,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Safety Perimeter Fencing (GI Mesh)"
     ],
     projectNote:
-      "Project details to be added. JNP Infra Eng Works provides civil piling and MMS execution support in Adani Renewables solar park scopes."
+      "JNP Infra Eng Works provides civil piling and MMS execution support in Adani Renewables solar park scopes.",
+    executedWorks: [
+      {
+        title: "Gigawatt-Scale Solar Piling",
+        scope: "DTH Piling for large-scale solar park across hard rocky terrain",
+        location: "Rajasthan",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling"
+      },
+      {
+        title: "GI Mesh Boundary Fencing",
+        scope: "Galvanized iron mesh perimeter security fencing for mega solar park",
+        location: "Gujarat",
+        image: "/images/crash-barrier.jpg",
+        tag: "Fencing"
+      }
+    ]
   },
   {
     id: "vikram-solar",
@@ -175,7 +289,16 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Boundary Security Mesh"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides MMS installation and civil support in Vikram Solar project scopes.",
+    executedWorks: [
+      {
+        title: "MMS Installation & Site Grading",
+        scope: "Module Mounting Structure installation and land leveling for solar park",
+        location: "Tamil Nadu",
+        image: "/images/solar-infra.jpg",
+        tag: "MMS & Civil"
+      }
+    ]
   },
   {
     id: "ntpc-green",
@@ -195,7 +318,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Perimeter Fencing"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides piling and MMS execution within NTPC Green public-sector solar project scopes.",
+    executedWorks: [
+      {
+        title: "Hard Rock DTH Piling",
+        scope: "Down-the-hole drilling and piling on rocky terrain for NTPC solar infrastructure",
+        location: "Rajasthan",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling"
+      },
+      {
+        title: "ICR Fabrication & Plinth",
+        scope: "ICR structural fabrication and transformer plinth civil works",
+        location: "Madhya Pradesh",
+        image: "/images/heavy-fab.jpg",
+        tag: "Fabrication"
+      }
+    ]
   },
   {
     id: "rays-power",
@@ -215,7 +354,16 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Boundary Security Fencing"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra supports Rays Power Infra with piling and civil execution on solar park projects.",
+    executedWorks: [
+      {
+        title: "Solar Park Piling & MMS",
+        scope: "Auger & DTH piling and MMS structure installation for solar park blocks",
+        location: "Chhattisgarh",
+        image: "/images/solar-infra.jpg",
+        tag: "Piling & MMS"
+      }
+    ]
   },
 
   // ── WATER INFRASTRUCTURE ─────────────────────────────────────────────────
@@ -237,7 +385,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "DWC Pipe Jointing"
     ],
     projectNote:
-      "Project details to be added. JNP Infra provides machine jointing and civil works support in MEIL bulk water transmission project corridors."
+      "JNP Infra provides machine jointing and civil works support in MEIL bulk water transmission project corridors.",
+    executedWorks: [
+      {
+        title: "HDPE Bulk Pipeline Jointing",
+        scope: "Machine butt fusion jointing of large-diameter HDPE pipes for water transmission corridor",
+        location: "Telangana",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "RCC Valve Chamber Construction",
+        scope: "RCC block valve chamber and thrust block civil construction along water main",
+        location: "Andhra Pradesh",
+        image: "/images/irrigation.jpg",
+        tag: "Civil"
+      }
+    ]
   },
   {
     id: "wabag",
@@ -257,7 +421,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Irrigation & Distribution Pipelines"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra supports WABAG with pipeline and chamber civil works on water treatment projects.",
+    executedWorks: [
+      {
+        title: "HDPE Electrofusion Pipeline",
+        scope: "Electrofusion jointing of HDPE distribution pipes for water treatment plant network",
+        location: "Tamil Nadu",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Irrigation Distribution Works",
+        scope: "Irrigation and distribution pipeline network laying and jointing works",
+        location: "Karnataka",
+        image: "/images/irrigation.jpg",
+        tag: "Irrigation"
+      }
+    ]
   },
   {
     id: "lt-water",
@@ -277,7 +457,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Irrigation Network Works"
     ],
     projectNote:
-      "Project details to be added. JNP Infra supports L&T WET projects with specialized pipeline execution and civil chamber construction."
+      "JNP Infra supports L&T WET projects with specialized pipeline execution and civil chamber construction.",
+    executedWorks: [
+      {
+        title: "DI Pipeline Laying & Jointing",
+        scope: "Ductile Iron pipe laying, jointing and thrust block works for bulk water supply main",
+        location: "Maharashtra",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "RCC Valve Chamber Works",
+        scope: "RCC valve and air release chamber construction along water main corridor",
+        location: "Rajasthan",
+        image: "/images/irrigation.jpg",
+        tag: "Civil"
+      }
+    ]
   },
   {
     id: "welspun",
@@ -297,7 +493,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "RCC Valve & Air Chambers"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides pipeline jointing and pressure testing in Welspun water transmission project corridors.",
+    executedWorks: [
+      {
+        title: "HDPE Transmission Pipeline",
+        scope: "Butt fusion jointing of large-diameter HDPE water transmission pipes",
+        location: "Uttar Pradesh",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Hydrostatic Pressure Testing",
+        scope: "Full pipeline hydrostatic pressure testing and commissioning works",
+        location: "Gujarat",
+        image: "/images/water-tanks.jpg",
+        tag: "Testing"
+      }
+    ]
   },
   {
     id: "ncc",
@@ -317,7 +529,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Agricultural Pipeline & Wall Chambers"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides pipeline jointing and civil works support in NCC water supply project corridors.",
+    executedWorks: [
+      {
+        title: "Urban Water Supply Pipeline",
+        scope: "HDPE & DI pipe jointing for urban water supply distribution network",
+        location: "Andhra Pradesh",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Agricultural Irrigation Works",
+        scope: "Agricultural pipeline network laying and wall chamber construction",
+        location: "Karnataka",
+        image: "/images/irrigation.jpg",
+        tag: "Irrigation"
+      }
+    ]
   },
   {
     id: "vishvaraj",
@@ -337,7 +565,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Hydrostatic Testing"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides pipeline and chamber civil works for Vishvaraj 24x7 water supply projects.",
+    executedWorks: [
+      {
+        title: "24x7 Water Distribution Pipeline",
+        scope: "HDPE & DI pipeline jointing for 24x7 distribution network under PPP scheme",
+        location: "Maharashtra",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Water Tank Installation",
+        scope: "Zincalume & SMC modular water tank supply, installation and commissioning",
+        location: "Maharashtra",
+        image: "/images/water-tanks.jpg",
+        tag: "Tanks"
+      }
+    ]
   },
   {
     id: "tata-projects",
@@ -357,7 +601,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Water Tank Installation (Zincalume / SMC)"
     ],
     projectNote:
-      "Project details to be added. JNP Infra provides pipeline and civil support within Tata Projects infrastructure contracts."
+      "JNP Infra provides pipeline and civil support within Tata Projects infrastructure contracts.",
+    executedWorks: [
+      {
+        title: "Industrial Pipeline Network",
+        scope: "HDPE butt fusion & electrofusion pipeline works for industrial water distribution",
+        location: "Maharashtra",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Water Tank Installation",
+        scope: "Zincalume modular water storage tank installation and commissioning",
+        location: "Gujarat",
+        image: "/images/water-tanks.jpg",
+        tag: "Tanks"
+      }
+    ]
   },
   {
     id: "spml",
@@ -377,7 +637,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Pressure Testing & Commissioning"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides machine jointing, pressure testing and civil works in SPML water infrastructure project scopes.",
+    executedWorks: [
+      {
+        title: "Bulk Water Transmission Pipeline",
+        scope: "HDPE machine jointing and DI pipe works for bulk water transmission main",
+        location: "Rajasthan",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "RCC Chambers & Civil Works",
+        scope: "RCC valve & air release chamber construction and pressure testing of pipeline",
+        location: "Uttar Pradesh",
+        image: "/images/irrigation.jpg",
+        tag: "Civil"
+      }
+    ]
   },
   {
     id: "enviro-infra",
@@ -397,7 +673,23 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Hydrostatic Testing"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides pipeline jointing and civil support in Enviro Infra water infrastructure projects.",
+    executedWorks: [
+      {
+        title: "Water Distribution Pipeline",
+        scope: "HDPE & DWC pipeline jointing for water supply distribution network",
+        location: "Jharkhand",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "Irrigation Pipeline System",
+        scope: "Agricultural irrigation pipeline network laying, jointing and chamber works",
+        location: "Bihar",
+        image: "/images/irrigation.jpg",
+        tag: "Irrigation"
+      }
+    ]
   },
   {
     id: "ems",
@@ -417,6 +709,22 @@ export const CLIENT_DETAILS: ClientDetailData[] = [
       "Distribution Network Works"
     ],
     projectNote:
-      "Project details to be added."
+      "JNP Infra provides pipeline and civil works support in EMS government water supply scheme projects.",
+    executedWorks: [
+      {
+        title: "Government Water Supply Scheme",
+        scope: "DI & HDPE pipeline jointing and DWC pipe works for government water supply scheme",
+        location: "Odisha",
+        image: "/images/pipeline-hero.jpg",
+        tag: "Pipeline"
+      },
+      {
+        title: "RCC Manholes & Chambers",
+        scope: "RCC manhole and chamber construction for sewerage collection and water distribution",
+        location: "West Bengal",
+        image: "/images/irrigation.jpg",
+        tag: "Civil"
+      }
+    ]
   }
 ];

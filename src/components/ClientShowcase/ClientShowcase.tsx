@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
-import { X, ArrowRight, ChevronRight, Briefcase, Info } from 'lucide-react';
+import { X, ArrowRight, ChevronRight, Briefcase, Info, Camera, MapPin } from 'lucide-react';
 import styles from './ClientShowcase.module.css';
 import { ClientDetailData } from '@/data/clientDetails';
 
@@ -240,6 +240,54 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
                   ))}
                 </ul>
               </div>
+
+              {/* Executed Works Image Gallery */}
+              {activeClient.executedWorks && activeClient.executedWorks.length > 0 && (
+                <div className={styles.panelBlock}>
+                  <div className={styles.panelBlockHeader}>
+                    <div className={styles.panelBlockIconBox} style={{ background: 'rgba(10, 37, 64, 0.1)', color: 'var(--color-primary)' }}>
+                      <Camera size={16} />
+                    </div>
+                    <div>
+                      <h4 className={styles.panelBlockTitle}>Executed Works</h4>
+                      <span className={styles.panelBlockSubtitle}>Photographic record of JNP field execution</span>
+                    </div>
+                  </div>
+                  <div className={styles.worksGallery}>
+                    {activeClient.executedWorks.map((work, i) => (
+                      <div key={i} className={styles.workCard}>
+                        <div className={styles.workImgWrap}>
+                          <img
+                            src={work.image}
+                            alt={work.title}
+                            className={styles.workImg}
+                            loading="lazy"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).style.display = 'none';
+                              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                              if (fallback) fallback.style.display = 'flex';
+                            }}
+                          />
+                          <div className={styles.workImgFallback}>
+                            <Camera size={24} />
+                          </div>
+                          <span className={styles.workTag}>{work.tag}</span>
+                        </div>
+                        <div className={styles.workInfo}>
+                          <div className={styles.workTitle}>{work.title}</div>
+                          <div className={styles.workScope}>{work.scope}</div>
+                          {work.location && (
+                            <div className={styles.workLocation}>
+                              <MapPin size={11} />
+                              {work.location}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Project Record Note */}
               <div className={styles.projectNote}>
