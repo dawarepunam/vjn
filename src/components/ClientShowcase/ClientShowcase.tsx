@@ -135,9 +135,18 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
       >
         {activeClient && (
           <div className={styles.panelInner}>
-            {/* Premium Header */}
+            {/* Premium Centered Header */}
             <div className={styles.panelHeader}>
-              <div className={styles.panelHeaderTop}>
+              <button
+                ref={closeBtnRef}
+                className={styles.closeBtn}
+                onClick={closePanel}
+                aria-label="Close client details panel"
+              >
+                <X size={18} />
+              </button>
+
+              <div className={styles.panelLogoCenterWrapper}>
                 <div className={styles.panelLogoCard}>
                   {activeClient.logoUrl ? (
                     <img
@@ -155,18 +164,9 @@ export default function ClientShowcase({ clients, categoryIcon, categoryLabel }:
                     className={styles.panelLogoUnavailableBig}
                     style={{ display: activeClient.logoUrl ? 'none' : 'flex' }}
                   >
-                    <span>Logo</span>
+                    <span>{activeClient.logoMark || activeClient.shortName}</span>
                   </div>
                 </div>
-
-                <button
-                  ref={closeBtnRef}
-                  className={styles.closeBtn}
-                  onClick={closePanel}
-                  aria-label="Close client details panel"
-                >
-                  <X size={18} />
-                </button>
               </div>
 
               <div className={styles.panelHeaderContent}>
