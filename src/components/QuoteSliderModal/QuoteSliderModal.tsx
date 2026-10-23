@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import styles from './QuoteSliderModal.module.css';
 import { COMPANY_CONTACT } from '@/data/companyData';
+import DetailedEnquiryModal, { SlideContextData } from '../DetailedEnquiryModal/DetailedEnquiryModal';
 
 interface ProjectQuoteSlide {
   id: string;
@@ -100,6 +101,7 @@ export default function QuoteSliderModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isDetailedEnquiryOpen, setIsDetailedEnquiryOpen] = useState(false);
   const autoPlayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const openModal = useCallback(() => {
@@ -109,6 +111,14 @@ export default function QuoteSliderModal() {
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, []);
+
+  const handleOpenDetailedEnquiry = () => {
+    setIsDetailedEnquiryOpen(true);
+  };
+
+  const handleCloseDetailedEnquiry = () => {
+    setIsDetailedEnquiryOpen(false);
+  };
 
   // Automatic trigger on EVERY hard refresh / newly opened site after 3.5 seconds
   useEffect(() => {
@@ -168,8 +178,9 @@ export default function QuoteSliderModal() {
   }, []);
 
   // Faster 1.8s transition; auto-closes after all 4 slides complete
+  // IMPORTANT: When Detailed Enquiry Modal is open, PAUSE slider completely. When closed, RESUME!
   useEffect(() => {
-    if (!isOpen || isPaused) {
+    if (!isOpen || isPaused || isDetailedEnquiryOpen) {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
       return;
     }
@@ -181,21 +192,21 @@ export default function QuoteSliderModal() {
     return () => {
       if (autoPlayTimerRef.current) clearInterval(autoPlayTimerRef.current);
     };
-  }, [isOpen, isPaused, nextSlide]);
-
-  if (!isOpen) return null;
+  }, [isOpen, isPaused, isDetailedEnquiryOpen, nextSlide]);
 
   const current = PROJECT_QUOTES[currentSlideIndex];
   const isImageLeft = current.layout === 'image-left';
 
   return (
-    <div 
-      className={styles.overlay} 
-      onClick={closeModal}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="quote-modal-heading"
-    >
+    <>
+      {isOpen && (
+        <div 
+          className={styles.overlay} 
+          onClick={closeModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quote-modal-heading"
+        >
       <div 
         className={styles.modalBox}
         onClick={(e) => e.stopPropagation()}
@@ -273,14 +284,15 @@ export default function QuoteSliderModal() {
 
               {/* Call to action within the quote side */}
               <div className={styles.quoteActionRow}>
-                <Link 
-                  href="/contact" 
+                <button 
+                  type="button"
                   className={styles.requestQuoteBtn}
-                  onClick={closeModal}
+                  onClick={handleOpenDetailedEnquiry}
+                  id="open-detailed-enquiry-btn"
                 >
                   <span>Request Custom Project Proposal</span>
                   <ArrowRight size={16} />
-                </Link>
+                </button>
 
                 <a 
                   href={`tel:${COMPANY_CONTACT.owners[0].phones[0]}`}
@@ -332,6 +344,23 @@ export default function QuoteSliderModal() {
         </div>
 
       </div>
+
     </div>
+    )}
+
+    {/* Dynamic Detailed Enquiry Modal renders independently so it NEVER disappears */}
+    <DetailedEnquiryModal 
+      isOpen={isDetailedEnquiryOpen}
+      onClose={handleCloseDetailedEnquiry}
+      slideData={{
+        id: current.id,
+        category: current.category,
+        title: current.title,
+        quoteTitle: current.quoteTitle,
+        quoteEstimate: current.quoteEstimate,
+        scopeSummary: current.scopeSummary
+      }}
+    />
+    </>
   );
 }

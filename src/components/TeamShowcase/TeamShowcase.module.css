@@ -135,6 +135,17 @@
   justify-content: center;
   flex-shrink: 0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  position: relative;
+}
+
+.cardAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  display: block;
 }
 
 .cardAvatarInitials {
@@ -264,60 +275,126 @@
   overflow: hidden;
 }
 
-/* Hero Header of drawer */
-.panelHero {
-  background: #06152B;
-  padding: 28px 28px 30px 28px;
+/* ── Clean Executive Header — Dedicated Photo Card + Clear Identity ── */
+.executiveHeaderClean {
+  background: radial-gradient(circle at 10% 20%, #0F2A4A 0%, #06152B 100%);
+  border-bottom: 2px solid #F59E0B;
+  padding: 24px 28px 26px 28px;
   position: relative;
   flex-shrink: 0;
   color: #FFFFFF;
-  border-bottom: 2px solid #F59E0B;
-}
-
-.panelHeroTop {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.panelAvatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #0A2540;
-  border: 2px solid #F59E0B;
-  color: #FFFFFF;
+.cleanHeaderTop {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  font-weight: 800;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.panelCloseBtn {
+.panelCloseBtnClean {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #CBD5E1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #FFFFFF;
   transition: all 180ms ease;
 }
 
-.panelCloseBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
+.panelCloseBtnClean:hover {
+  background: #F59E0B;
+  border-color: #F59E0B;
+  color: #06152B;
   transform: rotate(90deg);
 }
 
-.panelHeroContent {
+.executiveIdentityRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Dedicated Portrait Photo Card */
+.executivePhotoFrame {
+  width: 110px;
+  height: 125px;
+  border-radius: 16px;
+  border: 2px solid #F59E0B;
+  background: #06152B;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(245, 158, 11, 0.3);
+  position: relative;
+}
+
+.executivePhotoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.executivePhotoFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #F59E0B;
+  background: #0A2540;
+}
+
+/* Details Column */
+.executiveDetailsCol {
   display: flex;
   flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.executiveName {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+
+.executiveDesignation {
+  font-size: 0.86rem;
+  color: #CBD5E1;
+  line-height: 1.45;
+}
+
+.executiveQuickBadges {
+  display: flex;
+  align-items: center;
   gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.quickBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FDBA74;
+  background: rgba(224, 122, 43, 0.15);
+  border: 1px solid rgba(224, 122, 43, 0.35);
+  padding: 2px 8px;
+  border-radius: 6px;
 }
 
 .panelRoleBadge {

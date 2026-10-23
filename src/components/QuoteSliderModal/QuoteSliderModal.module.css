@@ -320,6 +320,9 @@
   box-shadow: 0 4px 16px rgba(224, 122, 43, 0.4);
   transition: all 0.25s ease;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .requestQuoteBtn:hover {

@@ -9,6 +9,7 @@ export interface PartnerData {
   id: string;
   initials: string;
   name: string;
+  photo?: string;       // Image path e.g. /images/nitin-pawar.jpg
   role: string;         // e.g. "Partner"
   rolePill: string;
   designation: string;  // full designation
@@ -25,6 +26,7 @@ const PARTNERS: PartnerData[] = [
     id: 'nitin-pawar',
     initials: 'NP',
     name: 'Nitin Pawar',
+    photo: '/images/nitin-pawar.jpg',
     role: 'Partner',
     rolePill: 'Partner',
     designation: 'Partner & Managing Director — JNP Infra Eng Works',
@@ -50,6 +52,7 @@ const PARTNERS: PartnerData[] = [
     id: 'sukaram-jamadar',
     initials: 'SJ',
     name: 'Sukaram Jamadar',
+    photo: '/images/sukaram-jamadar.png',
     role: 'Partner',
     rolePill: 'Partner',
     designation: 'Partner & Project Manager — JNP Infra Eng Works',
@@ -77,15 +80,20 @@ export default function TeamShowcase() {
   const [activePartner, setActivePartner] = useState<PartnerData | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
 
-  // Body scroll lock
+  // Body & HTML scroll lock — completely removes the main browser window scrollbar
   useEffect(() => {
     if (activePartner) {
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
       setTimeout(() => closeBtnRef.current?.focus(), 60);
     } else {
+      document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => { 
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = ''; 
+    };
   }, [activePartner]);
 
   // Escape key handler
@@ -131,7 +139,25 @@ export default function TeamShowcase() {
               {/* Top Row: Avatar + Name + Partner Tag */}
               <div className={styles.cardHeader}>
                 <div className={styles.cardAvatar}>
-                  <span className={styles.cardAvatarInitials}>{partner.initials}</span>
+                  {partner.photo ? (
+                    <img 
+                      src={partner.photo} 
+                      alt={partner.name} 
+                      className={styles.cardAvatarImg} 
+                      onError={(e) => {
+                        // Fallback to initials if image file not yet present
+                        (e.currentTarget as HTMLElement).style.display = 'none';
+                        const fallback = e.currentTarget.parentElement?.querySelector(`.${styles.cardAvatarInitials}`) as HTMLElement;
+                        if (fallback) fallback.style.display = 'flex';
+                      }}
+                    />
+                  ) : null}
+                  <span 
+                    className={styles.cardAvatarInitials} 
+                    style={{ display: partner.photo ? 'none' : 'flex' }}
+                  >
+                    {partner.initials}
+                  </span>
                 </div>
                 <div className={styles.cardIdentity}>
                   <h3 className={styles.cardName}>{partner.name}</h3>
@@ -189,15 +215,17 @@ export default function TeamShowcase() {
         {activePartner && (
           <div className={styles.panelInner}>
 
-            {/* Hero Header */}
-            <div className={styles.panelHero}>
-              <div className={styles.panelHeroTop}>
-                <div className={styles.panelAvatar}>
-                  <span className={styles.panelAvatarInitials}>{activePartner.initials}</span>
-                </div>
+            {/* Clean Executive Header — Dedicated Photo Card + Clear Identity */}
+            <div className={styles.executiveHeaderClean}>
+              {/* Top row with close button */}
+              <div className={styles.cleanHeaderTop}>
+                <span className={styles.panelRoleBadge}>
+                  <span className={styles.panelRoleDot} />
+                  {activePartner.rolePill || activePartner.role}
+                </span>
                 <button
                   ref={closeBtnRef}
-                  className={styles.panelCloseBtn}
+                  className={styles.panelCloseBtnClean}
                   onClick={closePanel}
                   aria-label="Close partner profile panel"
                 >
@@ -205,13 +233,30 @@ export default function TeamShowcase() {
                 </button>
               </div>
 
-              <div className={styles.panelHeroContent}>
-                <span className={styles.panelRoleBadge}>
-                  <span className={styles.panelRoleDot} />
-                  {activePartner.role}
-                </span>
-                <h3 className={styles.panelName}>{activePartner.name}</h3>
-                <div className={styles.panelDesignation}>{activePartner.designation}</div>
+              {/* Main Executive Identity Row: Photo on Left, Details on Right */}
+              <div className={styles.executiveIdentityRow}>
+                <div className={styles.executivePhotoFrame}>
+                  {activePartner.photo ? (
+                    <img 
+                      src={activePartner.photo} 
+                      alt={activePartner.name} 
+                      className={styles.executivePhotoImg}
+                    />
+                  ) : (
+                    <div className={styles.executivePhotoFallback}>
+                      <span>{activePartner.initials}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.executiveDetailsCol}>
+                  <h3 className={styles.executiveName}>{activePartner.name}</h3>
+                  <div className={styles.executiveDesignation}>{activePartner.designation}</div>
+                  <div className={styles.executiveQuickBadges}>
+                    <span className={styles.quickBadge}>Leadership</span>
+                    <span className={styles.quickBadge}>Verified Partner</span>
+                  </div>
+                </div>
               </div>
             </div>
 
