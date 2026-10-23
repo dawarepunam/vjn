@@ -14,6 +14,7 @@ export default function EmailVerificationModal() {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [generatedOtp, setGeneratedOtp] = useState('');
 
   const otpInputRefs = [
     useRef<HTMLInputElement>(null),
@@ -76,10 +77,11 @@ export default function EmailVerificationModal() {
       const data = await res.json();
 
       if (data.success) {
+        setGeneratedOtp(data.otp || '');
         setStep('otp');
         setTimeout(() => otpInputRefs[0].current?.focus(), 150);
       } else {
-        setErrorMsg(data.message || 'Unable to send verification code. Please check your email.');
+        setErrorMsg(data.message || 'Unable to generate verification code. Please try again.');
       }
     } catch {
       setErrorMsg('Network connectivity issue. Please check your connection and try again.');
@@ -262,8 +264,25 @@ export default function EmailVerificationModal() {
                 Enter <span>4-Digit Verification Code</span>
               </h3>
               <p className={styles.subtitle}>
-                We have sent a 4-digit code to <strong>{email}</strong>. Please check your inbox or spam folder.
+                Your one-time verification code for <strong>{email}</strong>:
               </p>
+              {generatedOtp && (
+                <div style={{
+                  background: 'linear-gradient(135deg, #0B192C 0%, #1a2d4a 100%)',
+                  border: '1.5px solid #F59E0B',
+                  borderRadius: '12px',
+                  padding: '16px 24px',
+                  textAlign: 'center',
+                  marginBottom: '16px',
+                  boxShadow: '0 0 24px rgba(245,158,11,0.15)'
+                }}>
+                  <p style={{ color: '#94a3b8', fontSize: '12px', margin: '0 0 6px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>Your Verification Code</p>
+                  <div style={{ fontSize: '38px', fontWeight: '900', letterSpacing: '12px', color: '#F59E0B', fontFamily: 'monospace' }}>
+                    {generatedOtp}
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '11px', margin: '6px 0 0 0' }}>Valid for 10 minutes · Enter this code below</p>
+                </div>
+              )}
 
               {errorMsg && (
                 <div className={styles.errorBanner} style={{ marginBottom: 14 }}>
