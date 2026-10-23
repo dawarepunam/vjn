@@ -32,10 +32,205 @@
   pointer-events: none;
 }
 
+.heroSplitGrid {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .heroSplitGrid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+  }
+}
+
 .heroContent {
   position: relative;
   z-index: 3;
-  max-width: 780px;
+}
+
+/* ─── Telemetry Dashboard Card (Right Hero Column) ─── */
+.telemetryCardWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.telemetryCard {
+  background: rgba(10, 37, 64, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 26px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45),
+              0 0 35px rgba(224, 122, 43, 0.12);
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), border-color 300ms ease;
+}
+
+.telemetryCard:hover {
+  border-color: rgba(224, 122, 43, 0.4);
+  transform: translateY(-4px);
+}
+
+.telemetryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.telemetryHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.telemetryLiveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: telemetryPulse 2s infinite;
+}
+
+@keyframes telemetryPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.telemetryTitle {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.telemetryBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #FDBA74;
+  background: rgba(224, 122, 43, 0.15);
+  border: 1px solid rgba(224, 122, 43, 0.3);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.telemetryList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.telemetryRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 200ms ease;
+}
+
+.telemetryRow:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+}
+
+.telemetryIconBox {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 165, 233, 0.12);
+  color: #38BDF8;
+  flex-shrink: 0;
+}
+
+.telemetryText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.telemetryLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.telemetryValue {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+.telemetryTag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #CBD5E1;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+}
+
+.telemetryFooter {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.telemetryTrustLogos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.telemetryTrustLogos span {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.telemetryTierPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.telemetryPill {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: all 180ms ease;
+}
+
+.telemetryPill:hover {
+  background: rgba(224, 122, 43, 0.15);
+  border-color: rgba(224, 122, 43, 0.4);
+  color: #FFFFFF;
 }
 
 .heroBadge {

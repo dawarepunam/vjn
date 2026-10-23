@@ -38,54 +38,117 @@ export default function HomePage() {
 
   return (
     <>
-      {/* SECTION 1: HERO VIEWPORT */}
+      {/* SECTION 1: HERO VIEWPORT WITH EXECUTIVE COMMAND TELEMETRY */}
       <section className={styles.heroSection}>
         <div className={styles.heroBackground} />
         <div className={styles.heroGlow} />
-        <div className={`container ${styles.heroContent}`}>
-          <div className={styles.heroBadge}>
-            <ShieldCheck size={16} />
-            <span>Infrastructure Execution & EPC Support</span>
+        <div className={`container ${styles.heroSplitGrid}`}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroBadge}>
+              <ShieldCheck size={16} />
+              <span>Infrastructure Execution &amp; EPC Support</span>
+            </div>
+
+            <h1 className={styles.heroHeading}>
+              Engineering with Precision.{' '}
+              <span className={styles.heroHeadingHighlight}>Execution with Responsibility.</span>
+            </h1>
+
+            <p className={styles.heroSubtitle}>
+              M/s JNP Infra Eng Works executes critical water pipeline networks, utility-scale solar piling, 
+              industrial water storage tanks, and heavy structural engineering with unmatched field precision.
+            </p>
+
+            <div className={styles.heroCtaGroup}>
+              <Link href="/services" className={styles.heroPrimaryBtn}>
+                <span>Explore Our Services</span>
+                <ArrowRight size={18} />
+              </Link>
+              <Link href="/contact" className={styles.heroSecondaryBtn}>
+                <span>Contact Our Team</span>
+              </Link>
+            </div>
+
+            <div className={styles.heroTrustRow}>
+              <div className={styles.trustItem}>
+                <CheckCircle2 size={16} color="var(--color-accent)" />
+                <span>HDPE Butt Fusion &amp; DI Pipeline</span>
+              </div>
+              <div className={styles.trustItem}>
+                <CheckCircle2 size={16} color="var(--color-accent)" />
+                <span>DTH &amp; Tractor Auger Piling</span>
+              </div>
+              <div className={styles.trustItem}>
+                <CheckCircle2 size={16} color="var(--color-accent)" />
+                <span>Zincalume &amp; Panel Tanks</span>
+              </div>
+              <div className={styles.trustItem}>
+                <CheckCircle2 size={16} color="var(--color-accent)" />
+                <span>ISO 9001 / 14001 / 45001 Standards</span>
+              </div>
+            </div>
           </div>
 
-          <h1 className={styles.heroHeading}>
-            Engineering with Precision.{' '}
-            <span className={styles.heroHeadingHighlight}>Execution with Responsibility.</span>
-          </h1>
+          {/* RIGHT COLUMN: EXECUTIVE TELEMETRY DASHBOARD */}
+          <div className={styles.telemetryCardWrapper}>
+            <div className={styles.telemetryCard}>
+              <div className={styles.telemetryHeader}>
+                <div className={styles.telemetryHeaderLeft}>
+                  <div className={styles.telemetryLiveDot} />
+                  <span className={styles.telemetryTitle}>Contractor Capabilities</span>
+                </div>
+                <span className={styles.telemetryBadge}>ISO Verified</span>
+              </div>
 
-          <p className={styles.heroSubtitle}>
-            M/s JNP Infra Eng Works executes critical water pipeline networks, utility-scale solar piling, 
-            industrial water storage tanks, and heavy structural engineering with unmatched field precision.
-          </p>
+              <div className={styles.telemetryList}>
+                <div className={styles.telemetryRow}>
+                  <div className={styles.telemetryIconBox}>
+                    <Settings size={20} />
+                  </div>
+                  <div className={styles.telemetryText}>
+                    <span className={styles.telemetryLabel}>HDPE Butt Fusion Capacity</span>
+                    <span className={styles.telemetryValue}>Up to 1200 mm OD</span>
+                  </div>
+                  <span className={styles.telemetryTag}>Heavy Fleet</span>
+                </div>
 
-          <div className={styles.heroCtaGroup}>
-            <Link href="/services" className={styles.heroPrimaryBtn}>
-              <span>Explore Our Services</span>
-              <ArrowRight size={18} />
-            </Link>
-            <Link href="/contact" className={styles.heroSecondaryBtn}>
-              <span>Contact Our Team</span>
-            </Link>
+                <div className={styles.telemetryRow}>
+                  <div className={styles.telemetryIconBox} style={{ color: '#F59E0B', background: 'rgba(245, 158, 11, 0.12)' }}>
+                    <Sun size={20} />
+                  </div>
+                  <div className={styles.telemetryText}>
+                    <span className={styles.telemetryLabel}>Solar DTH Piling &amp; MMS</span>
+                    <span className={styles.telemetryValue}>50+ MW Foundations</span>
+                  </div>
+                  <span className={styles.telemetryTag}>Utility Scale</span>
+                </div>
+
+                <div className={styles.telemetryRow}>
+                  <div className={styles.telemetryIconBox} style={{ color: '#10B981', background: 'rgba(16, 185, 129, 0.12)' }}>
+                    <Award size={20} />
+                  </div>
+                  <div className={styles.telemetryText}>
+                    <span className={styles.telemetryLabel}>Integrated Management Standards</span>
+                    <span className={styles.telemetryValue}>ISO 9001, 14001, 45001</span>
+                  </div>
+                  <span className={styles.telemetryTag}>Certified</span>
+                </div>
+              </div>
+
+              <div className={styles.telemetryFooter}>
+                <div className={styles.telemetryTrustLogos}>
+                  <span>Trusted Execution Partner for Tier-1 EPCs</span>
+                  <div className={styles.telemetryTierPills}>
+                    <span className={styles.telemetryPill}>L&amp;T</span>
+                    <span className={styles.telemetryPill}>Tata Solar</span>
+                    <span className={styles.telemetryPill}>Adani</span>
+                    <span className={styles.telemetryPill}>Sterling &amp; Wilson</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className={styles.heroTrustRow}>
-            <div className={styles.trustItem}>
-              <CheckCircle2 size={16} color="var(--color-accent)" />
-              <span>HDPE Butt Fusion & DI Pipeline</span>
-            </div>
-            <div className={styles.trustItem}>
-              <CheckCircle2 size={16} color="var(--color-accent)" />
-              <span>DTH & Tractor Auger Piling</span>
-            </div>
-            <div className={styles.trustItem}>
-              <CheckCircle2 size={16} color="var(--color-accent)" />
-              <span>Zincalume & Panel Tanks</span>
-            </div>
-            <div className={styles.trustItem}>
-              <CheckCircle2 size={16} color="var(--color-accent)" />
-              <span>ISO 9001 / 14001 / 45001 Standards</span>
-            </div>
-          </div>
         </div>
       </section>
 
