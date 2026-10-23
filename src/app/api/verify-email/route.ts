@@ -19,7 +19,15 @@ function getTransporter() {
   const pass = process.env.SMTP_PASS;
 
   if (!user || !pass) {
-    return null; // SMTP not yet configured in env
+    return null;
+  }
+
+  // If host is gmail, service: 'gmail' handles ports and TLS automatically
+  if (host.includes('gmail.com')) {
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user, pass },
+    });
   }
 
   return nodemailer.createTransport({
@@ -58,11 +66,12 @@ export async function POST(request: Request) {
 
       const transporter = getTransporter();
       let sentViaEmail = false;
+      let emailError: string | null = null;
 
       if (transporter) {
         try {
           await transporter.sendMail({
-            from: `"JNP Infra Eng Works" <${process.env.SMTP_USER}>`,
+            from: `"M/s JNP Infra Eng Works" <${process.env.SMTP_USER}>`,
             to: email,
             subject: `${otp} is your Verification Code - JNP Infra Eng Works`,
             html: `
@@ -86,18 +95,26 @@ export async function POST(request: Request) {
             `,
           });
           sentViaEmail = true;
-        } catch (emailErr) {
+        } catch (emailErr: any) {
           console.error('[SMTP Send Error]', emailErr);
+          emailError = emailErr?.message || 'SMTP delivery failed';
         }
+      } else {
+        emailError = 'SMTP credentials not configured in environment.';
       }
 
       console.log(`[OTP Generated] Email: ${email} | Code: ${otp} | Sent via SMTP: ${sentViaEmail}`);
 
+      if (!sentViaEmail) {
+        return NextResponse.json({
+          success: false,
+          message: emailError || 'Unable to dispatch email. Please check your SMTP settings.',
+        }, { status: 500 });
+      }
+
       return NextResponse.json({
         success: true,
-        message: sentViaEmail 
-          ? `Verification code has been dispatched to ${email}.`
-          : `Verification code generated.`,
+        message: `Verification code has been dispatched to ${email}.`,
         email,
       });
     }
