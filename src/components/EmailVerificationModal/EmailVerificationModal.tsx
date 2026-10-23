@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Mail, ShieldCheck, CheckCircle2, ArrowRight, RefreshCw, AlertCircle, Lock } from 'lucide-react';
 import styles from './EmailVerificationModal.module.css';
 
-const SESSION_STORAGE_KEY = 'jnp_infra_email_verified';
+const STORAGE_KEY = 'jnp_infra_email_verified';
 
 export default function EmailVerificationModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,11 +23,11 @@ export default function EmailVerificationModal() {
     useRef<HTMLInputElement>(null),
   ];
 
-  // Check on mount if session is already verified
+  // Check on mount if email is already verified (only once ever via localStorage)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      const isVerified = sessionStorage.getItem(SESSION_STORAGE_KEY);
+      const isVerified = localStorage.getItem(STORAGE_KEY);
       if (!isVerified) {
         // Show immediately after short 600ms entrance
         const t = setTimeout(() => {
@@ -138,9 +138,9 @@ export default function EmailVerificationModal() {
       const data = await res.json();
 
       if (data.success) {
-        // Mark session verified
+        // Mark session/browser verified forever in localStorage
         try {
-          sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+          localStorage.setItem(STORAGE_KEY, 'true');
         } catch {
           // ignore
         }

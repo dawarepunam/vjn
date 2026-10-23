@@ -120,21 +120,26 @@ export default function QuoteSliderModal() {
     setIsDetailedEnquiryOpen(false);
   };
 
-  // Trigger quote modal: If already verified, open after 1.5s; otherwise wait for email verification event
+  // Auto-open QuoteSliderModal on every page visit/refresh (after 1.2s delay)
+  // Also listens to custom event 'open-quote-slider-modal' (from header/button clicks or post-email verification)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // If user already completed verification in this session, show quotes
+    // Check if email verification modal is currently showing (first time visitor)
+    // If verified, auto-open immediately after 1.2s.
+    // If not yet verified, wait slightly or open after email verification is submitted.
+    let timer: NodeJS.Timeout | null = null;
     try {
-      const isVerified = sessionStorage.getItem('jnp_infra_email_verified');
-      if (isVerified) {
-        const timer = setTimeout(() => {
+      const isEmailVerified = localStorage.getItem('jnp_infra_email_verified');
+      if (isEmailVerified) {
+        timer = setTimeout(() => {
           setIsOpen(true);
-        }, 1500);
-        return () => clearTimeout(timer);
+        }, 1200);
       }
     } catch {
-      // ignore
+      timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 1200);
     }
 
     const handleCustomTrigger = () => {
@@ -144,6 +149,7 @@ export default function QuoteSliderModal() {
     window.addEventListener('open-quote-slider-modal', handleCustomTrigger);
 
     return () => {
+      if (timer) clearTimeout(timer);
       window.removeEventListener('open-quote-slider-modal', handleCustomTrigger);
     };
   }, [openModal]);
