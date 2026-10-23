@@ -36,10 +36,19 @@ export default function Header() {
     setServicesDropdownOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile drawer is open
+  // Lock body scroll when mobile drawer is open (iOS Safari needs both html + body)
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    if (mobileMenuOpen) {
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    };
   }, [mobileMenuOpen]);
 
   const serviceCategories = [
