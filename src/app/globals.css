@@ -66,23 +66,31 @@ html {
   color: var(--color-text-main);
   font-family: var(--font-family-sans);
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
+  width: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
+  min-height: -webkit-fill-available;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-  max-width: 100vw;
+  max-width: 100%;
+  width: 100%;
   line-height: 1.6;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 main {
   flex: 1 0 auto;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
   padding-top: calc(72px + env(safe-area-inset-top, 0px));
 }
 

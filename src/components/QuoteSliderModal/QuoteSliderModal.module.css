@@ -120,6 +120,17 @@
   min-height: 440px;
 }
 
+@media (max-width: 859px) {
+  .sliderStage {
+    min-height: auto;
+  }
+  .modalContent {
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Slide Card Animation with Smooth Horizontal Side Entrance */
 .slideCard {
   display: grid;

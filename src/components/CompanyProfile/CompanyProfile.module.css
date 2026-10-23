@@ -236,6 +236,15 @@
   pointer-events: none;
 }
 
+@media (max-width: 640px) {
+  .imageFrame {
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
 .imageInner {
   position: relative;
   border-radius: 20px;
@@ -250,6 +259,12 @@
   object-fit: cover;
   display: block;
   transition: transform 600ms ease;
+}
+
+@media (max-width: 640px) {
+  .image {
+    height: 300px;
+  }
 }
 
 .imageInner:hover .image {
@@ -277,6 +292,20 @@
   padding: 14px 18px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
   animation: floatY 4s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .floatBadge {
+    left: 12px;
+    bottom: 12px;
+    padding: 10px 14px;
+  }
+  .expBadge {
+    top: -12px;
+    right: -10px;
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .floatIcon {
@@ -336,6 +365,14 @@
   opacity: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding-top: 48px;
+}
+
+@media (max-width: 480px) {
+  .statsRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-top: 32px;
+  }
 }
 
 @media (min-width: 640px) {

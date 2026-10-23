@@ -34,6 +34,17 @@
   overflow: hidden;
   animation: modalScaleUp 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   margin: auto;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 600px) {
+  .modalContainer {
+    border-radius: 18px;
+    max-height: 96vh;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
 }
 
 @keyframes modalScaleUp {
@@ -93,6 +104,19 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 32px;
+}
+
+@media (max-width: 600px) {
+  .leftCol {
+    padding: 24px 18px;
+    gap: 20px;
+  }
+  .modalHeading {
+    font-size: 1.4rem;
+  }
+  .modalSubheading {
+    font-size: 0.85rem;
+  }
 }
 
 @media (min-width: 900px) {
@@ -222,6 +246,12 @@
 .rightCol {
   padding: 36px 28px;
   background: rgba(10, 37, 64, 0.4);
+}
+
+@media (max-width: 600px) {
+  .rightCol {
+    padding: 24px 18px 30px 18px;
+  }
 }
 
 @media (min-width: 900px) {
